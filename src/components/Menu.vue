@@ -10,7 +10,7 @@
 
             <!-- x鈕 hidden 要不要 display:none -->
             <span class="bm-cross-button cross-style" @click="closeMenu" :class="{ hidden: !crossIcon }">
-                <span v-for="(x, index) in 2" :key="x" class="bm-cross" :style="{ position: 'absolute', width: '3px', height: '14px',transform: index === 1 ? 'rotate(45deg)' : 'rotate(-45deg)'}">
+                <span v-for="(x, index) in 2" :key="x" class="bm-cross" :style="{ position: 'absolute', width: '2px', height: '28px',transform: index === 1 ? 'rotate(45deg)' : 'rotate(-45deg)'}">
                 </span>
             </span>
 
@@ -273,12 +273,14 @@ export default {
     }
     .cross-style {
       position: absolute;
-      top: 12px;
-      right: 2px;
+      width: 24px;
+      height: 20px;
+      left: 48%;
+      top: 90px;
       cursor: pointer;
     }
     .bm-cross {
-      background: #bdc3c7;
+      background: #fff;
     }
     .bm-cross-button {
       height: 24px;
@@ -293,7 +295,7 @@ export default {
       position: absolute; /* Stay in place */
       z-index: 1000; /* Stay on top */
       top: 2%;
-      left: 2%;
+      left: 1.5%;
       border-radius:15px;
       background-color: rgb(47,85,151);
       overflow-x: hidden; /* Disable horizontal scroll */

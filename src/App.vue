@@ -1,10 +1,10 @@
 <template>
-  <div id="app">
-    <div class="colorBg">
+  <div id="app" ref="app">
+    <div class="main-content" ref="wrap">
         <router-view/>
     </div>
 <!-- 大尺寸選單 -->
-    <Menu @data="data" id="menu">
+    <Menu @data="data" id="menu" ref="menu">
       <b-nav vertical id="nav" class="mx-auto text-center">
 
         <b-nav-item>
@@ -36,6 +36,8 @@
         </b-nav-item>
 
       </b-nav>
+      <h3>{{this.width}}</h3>
+
       <!-- <router-link to="/">
           <font-awesome-icon :icon="['fas', 'home']"></font-awesome-icon>
       </router-link> -->
@@ -114,7 +116,8 @@ export default {
     return {
       side: 'left',
       currentMenu: 'push',
-      isBurgerShow: true
+      isBurgerShow: true,
+      width: ''
     }
   },
   components: {
@@ -124,6 +127,23 @@ export default {
     data (data) {
       this.isBurgerShow = data
     }
+
+  },
+  watch: {
+    changeWidth () {
+      if (this.width === 100) { this.$refs.wrap.width = 100 }
+    }
+  },
+  computed: {
+    getWidth () {
+      return this.$store.getters.sidebarWidth
+    }
+  },
+  mounted () {
+    const width = this.$refs.menu.$refs.sideNav.clientWidth
+    this.width = width
+    console.log(this.width)
+    // console.log(this.$refs.menu.$refs.sideNav)
   }
 }
 </script>

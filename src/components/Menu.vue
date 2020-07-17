@@ -294,9 +294,6 @@ export default {
       width: 100px; /* 0 width - change this with JavaScript */
       position: absolute; /* Stay in place */
       z-index: 1000; /* Stay on top */
-      top: 2%;
-      left: 1.5%;
-      border-radius:15px;
       background-color: rgb(47,85,151);
       overflow-x: hidden; /* Disable horizontal scroll */
       padding-top: 60px; /* Place content 60px from the top */

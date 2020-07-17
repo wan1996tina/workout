@@ -1,3 +1,4 @@
+
 html,body
     width 100%
     height 100%
@@ -7,25 +8,23 @@ html,body
     padding 0
     list-style none
     box-sizing border-box
+    font-family 'Microsoft JhengHei','Arial'
 
 // ---------- app.vue ----------------------------------------------------------
 #app 
     width 100%
     height 100vh
-    position relative
+    position fixed
     // background #ffa
     overflow hidden
 
 // 底色背景
-.colorBg
-    width 97%
+.main-content
+    width 100%
     height 150%
-    background-color rgb(47,85,151)
+    // background-color rgb(47,85,151)
     // background #999
-    border-radius 15px 15px 0 0
     position fixed
-    top 2%
-    left 1.5%
     z-index -1
 
 // 選單選項
@@ -93,6 +92,27 @@ html,body
     outline none
     border none
 
+.b-sidebar 
+    display flex
+    flex-direction column
+    position fixed !important
+    top 4%
+    right 4%
+    height 100vh
+    width 320px
+    max-width 100% !important
+    height 100vh !important
+    margin 0 !important
+    outline 0
+    -webkit-transform translateX(0)
+    transform translateX(0)
+    background #ffa !important
+    transition 0.5s !important
+
+.b-sidebar.b-sidebar-right 
+    left: auto;
+    right: 1.5%;
+    border-radius 15px 15px 0 0
 
 // ---------- home.vue ----------------------------------------------------------
 #home
@@ -100,10 +120,10 @@ html,body
     height 100%
     border-radius 20px 
     position absolute
-    top 20px
     left 96px
-    right 1%
-    width calc(98%-96)
+    right 0
+    width calc(100%-96)
+    overflow scroll
 
 #home h1
     font-size 40px
@@ -113,28 +133,116 @@ html,body
 
 #home .banner
     background #fff
-    height 400px
+    height 300px
     border-radius 20px
-    box-shadow 0px 10px 30px rgba(0,0,0,0.15)
+    box-shadow 0px 10px 20px rgba(50,50,50,0.1)
     font-size 110px
     text-align center
     color #ccc
     line-height 300px
 
-#home .subtitle 
+.subtitle 
     font-size 22px
     color #888
-    width 150px
+    width 100px
     height 50px
     line-height 50px
     text-align center
     
 
-#home .toolbar
+.toolbar
     height 50px
     margin 20px 0
+    padding 0
     border-radius 10px
-    box-shadow 0 0 10px rgba(0,0,0,0.2)
+    // box-shadow 0 0 10px rgba(0,0,0,0.1)
+
+
+#home .imgWrap
+    width 150px
+    height 100px
+    overflow hidden
+    border-radius 12px
+    object-fit cover
+
+#home .card
+    width 25%
+    display flex
+    justify-content center
+
+.img-fluid 
+    object-fit cover
+
+.login-btn
+    width 80px
+    height 28px
+    border-radius 14px
+    background rgb(47,85,151)
+    border none
+    color white
+    margin-left 50px
+    font-size 14px
+    line-height 28px
+
+.sign-btn
+    width 80px
+    height 28px
+    border-radius 14px
+    background #fff
+    border 1px solid rgb(47,85,151)
+    color rgb(47,85,151)
+    font-size 13px
+    line-height 25px
+    margin-left 50px
+    font-weight 600
+
+
+.login-btn:hover,
+.sign-btn:hover
+    background #ddd
+    color #000
+    transition 0.3s ease-in
+    border-color #ddd
+
+
+.login-btn:focus,
+.sign-btn:focus
+    outline none
+
+// -------- information.vue --------------------------------------------
+
+#information 
+    background #fff
+    height 100%
+    border-radius 20px 
+    position absolute
+    top 20px
+    left 96px
+    right 1%
+    width calc(98%-96)
+
+// -------- workout.vue --------------------------------------------
+#workout
+    background #fff
+    height 100%
+    border-radius 20px 
+    position absolute
+    top 20px
+    left 96px
+    right 1%
+    width calc(98%-96)
+
+
+// -------- timer.vue --------------------------------------------
+#timer
+    background #fff
+    height 100%
+    border-radius 20px 
+    position absolute
+    top 20px
+    left 96px
+    right 1%
+    width calc(98%-96)
 
 
 
@@ -145,3 +253,50 @@ html,body
         display block
     #menu 
         display none
+    .main-content
+        width 100%
+        left 0
+        background transparent
+
+.images 
+    width 250px
+    height 180px
+    display flex
+    align-items center
+    justify-content center
+    border-radius 10px
+    margin-left 0 10px
+
+.hooper-list
+    background-color pink
+
+.hooper-track
+    background green
+    width 130%
+
+.img1 
+    background orange
+
+.img2 
+    background lightblue
+
+.img3 
+    background lightblue
+
+.img4 
+    background lightblue
+
+.img5 
+    background lightblue
+
+h2 
+    color #fff
+
+.wrap-hooper 
+    height 220px
+    margin 50px 0
+    overflow hidden
+
+.wrap-hooper section:focus
+    outline none
+

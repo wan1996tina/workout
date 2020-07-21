@@ -5,12 +5,203 @@
         <b-col cols="9" class="toolbar">
           <p class="subtitle">Home</p>
         </b-col>
+        <!-- 登入、註冊、使用者 -->
         <b-col cols="3" class="d-flex justify-content-center align-items-center">
-          <input type="button" value="Log in" class="login-btn">
-          <input type="button" value="Sign up" class="sign-btn">
+          <!-- 註冊 button -->
+          <div>
+            <input type="button" value="Sign up" class="sign-btn" v-b-modal.modal-prevent-closing1>
+
+            <b-modal id="modal-prevent-closing1"
+              ref="modal"
+              title=""
+              @show="resetModal"
+              @hidden="resetModal"
+              @ok="handleOk"
+              size="lg"
+              :centered='isCenter'
+              class='d-flex flex-row'
+              footer-class="border-top-0 col-12 mx-auto justify-content-center"
+              hide-header
+            >
+              <b-row class="m-3 mt-4">
+
+              <div
+                class="col-12 col-md-5 mb-4 pt-3 d-flex justify-content-center flex-column align-items-center"
+                style="background:rgb(255, 227, 224); border-radius:12px;">
+
+                <h3 style="color:rgb(100,100,100);">Nice to meet you!</h3>
+                <p style="font-size:12px;color:#aaa;">歡迎加入我們，一起變健康吧!
+                </p>
+                <input type="button" value="Log in" class="login-btn m-0 my-3">
+              </div>
+
+              <div class="col-12 col-md-7">
+              <form ref="form" @submit.stop.prevent="handleSubmit">
+
+                <h3 class="text-center">註冊</h3>
+                <!-- 姓名 -->
+                <b-form-group
+                  :state="formState"
+                  label="Name"
+                  label-for="name-input"
+                  invalid-feedback="Name is required"
+                >
+                  <b-form-input
+                    id="name-input"
+                    v-model="name"
+                    :state="formState"
+                    required
+                  ></b-form-input>
+                </b-form-group>
+
+                <!-- 帳號 -->
+                <b-form-group
+                  :state="formState"
+                  label="Account"
+                  label-for="account-input"
+                  invalid-feedback="account is required"
+                >
+                  <b-form-input
+                    id="account-input"
+                    v-model="account"
+                    :state="formState"
+                    required
+                  ></b-form-input>
+                </b-form-group>
+
+                <!-- 密碼 -->
+                <b-form-group
+                  :state="formState"
+                  label="Password"
+                  label-for="password-input"
+                  invalid-feedback="password is required"
+                >
+                  <b-form-input
+                    id="password-input"
+                    v-model="password"
+                    :state="formState"
+                    required
+                    type="password"
+                  ></b-form-input>
+                </b-form-group>
+
+                <!-- 密碼 again -->
+                <b-form-group
+                  :state="formState"
+                  label="Password Again"
+                  label-for="password-input"
+                  invalid-feedback="password is required"
+                >
+                  <b-form-input
+                    id="password-input"
+                    v-model="password_again"
+                    :state="formState"
+                    required
+                    type="password"
+                  ></b-form-input>
+                </b-form-group>
+
+              </form>
+              </div>
+              </b-row>
+
+            </b-modal>
+          </div>
+
+          <!-- 登入 button -->
+          <div>
+            <input type="button" value="Log in" class="login-btn" v-b-modal.modal-prevent-closing>
+            <!-- <b-button v-b-modal.modal-prevent-closing>Open Modal</b-button> -->
+
+            <b-modal id="modal-prevent-closing"
+              ref="modal"
+              title=""
+              @show="resetModal"
+              @hidden="resetModal"
+              @ok="handleOk"
+              size="lg"
+              :centered='isCenter'
+              class='d-flex flex-row'
+              footer-class="border-top-0 col-12 mx-auto justify-content-center"
+              hide-header
+            >
+              <b-row class="m-3 mt-4">
+
+              <div
+                class="col-12 col-md-5 mb-4 pt-3 d-flex justify-content-center flex-column align-items-center"
+                style="background:rgb(224, 236, 255); border-radius:12px;">
+
+                <h3 style="color:rgb(47,85,151);">Welcome back!</h3>
+                <p style="font-size:12px;color:#aaa;">歡迎回來，這是歡迎訊息…</p>
+                <input type="button" value="Sign up" class="login-btn m-0 my-3">
+              </div>
+
+              <div class="col-12 col-md-7" style="height:400px;">
+              <form ref="form" @submit.stop.prevent="handleSubmit">
+
+                <h3 class="text-center">登入</h3>
+
+                <!-- 帳號 -->
+                <b-form-group
+                  :state="formState"
+                  label="Account"
+                  label-for="account-input"
+                  invalid-feedback="account is required"
+                  class="my-5"
+                >
+                  <b-form-input
+                    id="account-input"
+                    v-model="account"
+                    :state="formState"
+                    required
+                  ></b-form-input>
+                </b-form-group>
+
+                <!-- 密碼 -->
+                <b-form-group
+                  :state="formState"
+                  label="Password"
+                  label-for="password-input"
+                  invalid-feedback="password is required"
+                >
+                  <b-form-input
+                    id="password-input"
+                    v-model="password"
+                    :state="formState"
+                    required
+                    type="password"
+                  ></b-form-input>
+                </b-form-group>
+
+              </form>
+              </div>
+              </b-row>
+
+            </b-modal>
+          </div>
+
+          <!-- 使用者按鈕 -->
+          <div>
+            <b-button v-b-toggle.sidebar-right>Toggle Sidebar</b-button>
+            <b-sidebar id="sidebar-right" title="Sidebar" right>
+              <div class="px-3 py-2">
+                <p>
+                  Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
+                  in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+                </p>
+                <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img>
+              </div>
+            </b-sidebar>
+          </div>
+
         </b-col>
       </div>
-      <b-col col sm="12" lg="8" class="banner my-2"></b-col>
+
+      <!-- 橫幅 -->
+      <b-col col sm="12" lg="8" class="banner my-2">
+        <h1>Dare to be great.</h1>
+        <p>Workout at home</p>
+      </b-col>
 
       <!-- <div class="bg-info my-5" style="width:60%;">
         <b-col class="card bg-danger" >
@@ -21,110 +212,120 @@
         </b-col>
       </div> -->
 
-      <div class="wrap-hooper col-8 bg-light" >
+      <div class="wrap-hooper col-7" >
         <hooper :settings="hooperSettings">
           <slide>
             <div class="images img1">
-              <h2>Slider 1</h2>
+              <h2>運動前暖身</h2>
             </div>
           </slide>
           <slide>
             <div class="images img2">
-              <h2>Slider 2</h2>
+              <h2>運動後收操</h2>
             </div>
           </slide>
           <slide>
             <div class="images img3">
-              <h2>Slider 3</h2>
+              <h2>核心鍛鍊</h2>
             </div>
           </slide>
           <slide>
             <div class="images img4">
-              <h2>Slider 4</h2>
+              <h2>肩部拉伸</h2>
             </div>
           </slide>
           <slide>
             <div class="images img5">
-              <h2>Slider 5</h2>
+              <h2>腰部拉伸</h2>
             </div>
           </slide>
+          <hooper-navigation slot="hooper-addons"></hooper-navigation>
         </hooper>
       </div>
 
-      <div>
-        <b-button v-b-toggle.sidebar-right>Toggle Sidebar</b-button>
-        <b-sidebar id="sidebar-right" title="Sidebar" right>
-          <div class="px-3 py-2">
-            <p>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-              in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-            </p>
-            <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img>
-          </div>
-        </b-sidebar>
-      </div>
     </b-container>
   </div>
 </template>
 
 <script>
-import { Hooper, Slide } from 'hooper'
+import { Hooper, Slide, Navigation as HooperNavigation } from 'hooper'
 import 'hooper/dist/hooper.css'
+
 // import VueHorizontalList from '../components/vue-horizontal-list'
 export default {
   components: {
     Hooper,
-    Slide
+    Slide,
+    HooperNavigation
     // VueHorizontalList
   },
   data () {
     return {
+      isCenter: true,
+      name: '',
+      account: '',
+      password: '',
+      password_again: '',
+      formState: null,
+      submittedNames: [],
       hooperSettings: {
-        infiniteScroll: false,
+        itemsToShow: 3,
+        infiniteScroll: true,
         centerMode: true,
         autoPlay: true,
-        playSpeed: 3500,
-        breakpoints: {
-          2400: {
-            itemsToShow: 5
-          },
-          1800: {
-            itemsToShow: 4
-          },
-          1500: {
-            itemsToShow: 3
-          },
-          1100: {
-            itemsToShow: 2.5
-          },
-          0: {
-            itemsToShow: 1.5
-          }
+        playSpeed: 2000
+      },
+      swiperOption: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
         }
       }
-      // options: {
-      //   responsive: [
-      //     { end: 576, size: 1 },
-      //     { start: 576, end: 768, size: 2 },
-      //     { start: 768, end: 992, size: 3 },
-      //     { size: 4 }
-      //   ],
-      //   list: {
-      //     // 1200 because @media (min-width: 1200px) and therefore I want to switch to windowed mode
-      //     windowed: 1200,
-
-      //     // Because: #app {padding: 80px 24px;}
-      //     padding: 24
-      //   }
-      // },
-      // items: [
-      //   { title: 'Item 0', content: 'Content item with description' }
-      // ]
     }
   },
   computed: {
     viewWidth () {
       return this.$store.getters.getWidth
+    }
+  },
+  methods: {
+    checkFormValidity () {
+      // 查看否有條件需要驗證，通過的話回傳 true
+      const valid = this.$refs.form.checkValidity()
+      this.formState = valid
+      return valid
+    },
+    resetModal () {
+      // 清空表單資料
+      this.name = ''
+      this.account = ''
+      this.password_again = ''
+      this.password = ''
+      this.formState = null
+    },
+    handleOk (bvModalEvt) {
+      // 按下 ok 的時候，先暫停預設動作
+      // Prevent modal from closing
+      bvModalEvt.preventDefault()
+      // Trigger submit handler
+      this.handleSubmit()
+    },
+    handleSubmit () {
+      // Exit when the form isn't valid
+      // 是否通過驗證
+      if (!this.checkFormValidity()) {
+        return
+      }
+      // 把名字顯示在網頁上
+      // Push the name to submitted names
+      // this.submittedNames.push(this.name)
+      // 把 modal隱藏
+      // Hide the modal manually
+      this.$nextTick(() => {
+        this.$bvModal.hide('modal-prevent-closing')
+      })
     }
   }
 

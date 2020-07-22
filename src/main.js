@@ -14,7 +14,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import { faCoffee, faHome, faDumbbell, faInfoCircle, faStopwatch } from '@fortawesome/free-solid-svg-icons'
-library.add(faCoffee, faHome, faDumbbell, faInfoCircle, faStopwatch)
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
+library.add(faCoffee, faHome, faDumbbell, faInfoCircle, faStopwatch, faEnvelope)
 
 // 註冊元件
 Vue.component('font-awesome-icon', FontAwesomeIcon)

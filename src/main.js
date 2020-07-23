@@ -13,9 +13,10 @@ import 'aos/dist/aos.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import { faCoffee, faHome, faDumbbell, faInfoCircle, faStopwatch } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faHome, faDumbbell, faInfoCircle, faStopwatch, faPhone, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
-library.add(faCoffee, faHome, faDumbbell, faInfoCircle, faStopwatch, faEnvelope)
+import { faFacebookF, faFacebookSquare, faPinterestP, faInstagram, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons'
+library.add(faCoffee, faHome, faDumbbell, faInfoCircle, faStopwatch, faEnvelope, faPhone, faMapMarkerAlt, faFacebookF, faFacebookSquare, faPinterestP, faInstagram, faTwitter, faYoutube)
 
 // 註冊元件
 Vue.component('font-awesome-icon', FontAwesomeIcon)

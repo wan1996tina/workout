@@ -1,6 +1,6 @@
 <template lang="pug">
   #information(ref='info')
-    b-container(fluid style='width:95%;')
+    b-container(fluid style='width:100%;').p-0
       b-col.toolbar(cols='12')
         p.subtitle.d-none Information
       b-col.banner(cols='11')
@@ -22,32 +22,68 @@
       b-container.content1
         div.num2
         div.text-center.mx-auto.c1-title APPLICABLE
-        h4.box-1-title.mx-auto Dare to be great.
-        b-col.box-1(col md="8" lg="10") Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate excepturi deleniti dolorem eaque cumque! Vitae quos ex repellat. Cupiditate officiis soluta quidem provident voluptatem laudantium tempore quia corporis obcaecati praesentium. Ad ab omnis earum quod nesciunt quaerat assumenda. Quo vel similique laborum necessitatibus eligendi omnis hic, maxime beatae, quae dolorem asperiores perferendis.
+        h4.box-1-title.mx-auto
         //- 建議
-      b-container.content1
-        div.num3
-        div.text-center.mx-auto.c1-title SUGGESTION
-        h4.box-1-title.mx-auto Dare to be great.
-        div.form
-          b-form-group.mb-0
-            b-row
-              b-col(col md="3")
-                font-awesome-icon(:icon="['far', 'envelope']")
-              b-col(col md='7')
-                b-form-group(label-cols-sm='2' label='Street:' label-align-sm='right' label-for='nested-street')
-                  b-col.col-sm-5
-                    b-form-input#nested-street
-                b-form-group(label-cols-sm='2' label='City:' label-align-sm='right' label-for='nested-city')
-                  b-col.col-sm-5
-                    b-form-input#nested-city
-                b-form-group(label-cols-sm='2' label='State:' label-align-sm='right' label-for='nested-state')
-                  b-col.col-sm-5
-                    b-form-input#nested-state
-                b-form-group(label-cols-sm='2' label='Country:' label-align-sm='right' label-for='nested-country')
-                  b-col.col-sm-5
-                    b-form-input#nested-country
-                b-form-group.mb-0(label-cols-sm='2' label='Ship via:' label-align-sm='right')
-                  b-col.col-sm-5
-                    b-form-radio-group.pt-2(:options='[\'Air\', \'Courier\', \'Mail\']')
+      b-container.contact
+        b-col.num3(cols='12')
+        div.text-center.mx-auto.num3-title SUGGESTION
+        h4.box-1-title.mx-auto
+        b-row.info
+          b-col(col md='4' sm='12').text-center
+            font-awesome-icon(:icon="['fas','phone']")
+            h4 PHONE
+            p phone 02-2912-3456
+          b-col(col md='4' sm='12').text-center
+            font-awesome-icon(:icon="['fas','map-marker-alt']")
+            h4 ADDRESS
+            p  100台北市中正區廣州街15號
+          b-col(col md='4' sm='12').text-center
+            font-awesome-icon(:icon="['far','envelope']")
+            h4 EMAIL
+            p workout@123mail.com
+        b-row.form.justify-content-center
+          b-col.col-6.my-2
+            input.d-block.ml-auto(type='text' placeholder="Your name")
+          b-col.col-6.my-2
+            input.d-block.mr-auto(type='text' placeholder="Your e-mail")
+          b-col.col-12.my-2
+            input.d-block.mx-auto(type='text' placeholder="Subject")
+          b-col.col-12.my-2
+            textarea.d-block.mx-auto(placeholder="Message" rows="5" maxlength="300")
+          button.ct-submit SEND MESSAGE
+      b-container(fluid).footer.text-center
+        b-row.w-25.icons
+          b-col.col
+            div.icon-wrap
+              font-awesome-icon(:icon="['fab','facebook-f']")
+          b-col.col
+            div.icon-wrap
+              font-awesome-icon(:icon="['fab','instagram']")
+          b-col.col
+            div.icon-wrap
+              font-awesome-icon(:icon="['fab','twitter']")
+          b-col.col
+            div.icon-wrap
+              font-awesome-icon(:icon="['fab','youtube']")
+          b-col.col
+            div.icon-wrap
+              font-awesome-icon(:icon="['fab','pinterest-p']")
+        h6 Terms & Conditions  Privacy Policy
+        h6 Copyright &copy; 2020 Flaunter, Ltd. All rights reserved. Site credit.
 </template>
+
+<script>
+export default {
+  watch: {
+    height () {
+      const num3Bg = document.getElementsByClassName('num3')[0]
+      window.addEventListener('scroll', function () {
+        const value = window.scrollY
+        console.log(value)
+
+        num3Bg.style.backgroundPosition = (value * 1 + 200) + 'px' + ' ' + +'px'
+      }, true)
+    }
+  }
+}
+</script>

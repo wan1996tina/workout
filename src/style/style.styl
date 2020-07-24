@@ -531,7 +531,39 @@ html,body
     right 1%
     width calc(98%-96)
 
+#workout .banner
+    background #FFE1B2
+    height 300px
+    border-radius 20px
+    box-shadow 0px 10px 20px rgba(50,50,50,0.1)
+    color #444
+    display flex
+    justify-content flex-start
+    align-items center
+    margin-left 20px
 
+.banner .title
+    text-align center
+    line-height 300px
+    color #6C443C
+    font-family 'Playfair Display'
+    font-size 50px
+
+#workout .navbar
+    margin-top 30px
+    width 100%
+
+.navbar a
+    color #000
+
+
+#workout .poseCard
+    width 90%
+    height 150px
+    background #FFF0E4
+    border-radius 10px
+    margin 0 10px
+    box-shadow 0 5px 15px #FFF0E4
 // -------- timer.vue --------------------------------------------
 #timer
     background #fff
@@ -556,7 +588,7 @@ html,body
         width 100%
         left 0
         background transparent
-    #information,#home
+    #information,#home,#workout
         width 100% !important
         left 0px
     #information .banner
@@ -612,6 +644,9 @@ html,body
         left calc(50% - 107px)
     .box-1
         font-size 12px
+    #workout .banner .title
+        line-height 300px
+        font-size 30px
 
 .images 
     height 90%

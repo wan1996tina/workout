@@ -1,6 +1,10 @@
 <template>
-  <div id="home" :style="{ width : 'calc(' + viewWidth + '%-96)'}" ref="home">
-    <b-container fluid style="width:95%;">
+<!-- :style="{ width : 'calc(' + viewWidth + '%-96)'}" -->
+  <div id="home"  ref="home">
+    <b-container fluid style="width:100%; position:relative;" class="p-0">
+      <div class='bg-video'>
+        <video src="~@/assets/video.mp4" autoplay muted loop></video>
+      </div>
       <div class=" d-flex justify-content-center">
         <b-col cols="9" class="toolbar">
           <p class="subtitle">Home</p>
@@ -197,11 +201,15 @@
         </b-col>
       </div>
 
+      <h1 class='t1'>Healthy mind</h1>
+      <h1 class='t2'>in a</h1>
+      <h1 class='t3'>healthy body</h1>
+
       <!-- 橫幅 -->
-      <b-col col sm="12" lg="8" class="banner my-2">
+      <!-- <b-col col sm="12" lg="8" class="banner my-2">
         <h1>Dare to be great.</h1>
         <p>Workout at home</p>
-      </b-col>
+      </b-col> -->
 
       <!-- <div class="bg-info my-5" style="width:60%;">
         <b-col class="card bg-danger" >
@@ -212,7 +220,7 @@
         </b-col>
       </div> -->
 
-      <div class="wrap-hooper col-7" >
+      <!-- <div class="wrap-hooper col-7" >
         <hooper :settings="hooperSettings">
           <slide>
             <div class="images img1">
@@ -241,22 +249,22 @@
           </slide>
           <hooper-navigation slot="hooper-addons"></hooper-navigation>
         </hooper>
-      </div>
+      </div> -->
 
     </b-container>
   </div>
 </template>
 
 <script>
-import { Hooper, Slide, Navigation as HooperNavigation } from 'hooper'
-import 'hooper/dist/hooper.css'
+// import { Hooper, Slide, Navigation as HooperNavigation } from 'hooper'
+// import 'hooper/dist/hooper.css'
 
 // import VueHorizontalList from '../components/vue-horizontal-list'
 export default {
   components: {
-    Hooper,
-    Slide,
-    HooperNavigation
+    // Hooper,
+    // Slide,
+    // HooperNavigation
     // VueHorizontalList
   },
   data () {

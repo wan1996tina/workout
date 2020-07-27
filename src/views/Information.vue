@@ -22,7 +22,30 @@
       b-container.content1
         div.num2
         div.text-center.mx-auto.c1-title APPLICABLE
-        h4.box-1-title.mx-auto
+        b-row.c2-img.w-100.h-100.justify-content-center
+          b-col(cols='3').d-flex.justify-content-center.align-items-center.flex-column
+            div.img-wrap.mx-1
+              img(src='https://picsum.photos/600/500/?random=1')
+            h5.my-4 3C 產品使用者
+          b-col(cols='12').d-md-none
+
+          b-col(cols='3').d-flex.justify-content-center.align-items-center.flex-column
+            div.img-wrap.mx-1
+              img(src='https://picsum.photos/600/500/?random=2')
+            h5.my-4 久坐族群
+          b-col(cols='12').d-md-none
+
+          b-col(cols='3').d-flex.justify-content-center.align-items-center.flex-column
+            div.img-wrap.mx-1
+              img(src='https://picsum.photos/600/500/?random=3')
+            h5.my-4 有運動習慣者
+          b-col(cols='12').d-md-none
+
+          b-col(cols='3').d-flex.justify-content-center.align-items-center.flex-column
+            div.img-wrap.mx-1
+              img(src='https://picsum.photos/600/500/?random=4')
+            h5.my-4 無法外出運動者
+
         //- 建議
       b-container.contact
         b-col.num3(cols='12')

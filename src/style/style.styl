@@ -6,6 +6,22 @@
     font-family shorelines
     src url('../assets/Shorelines Script Bold.otf')
 
+@font-face 
+    font-family cream-peach
+    src url('../assets/Cream Peach.ttf')
+
+@font-face 
+    font-family bebasneue
+    src url('../assets/BebasNeue-Regular.ttf')
+
+@font-face 
+    font-family big-noodle
+    src url('../assets/big_noodle_titling.ttf')
+
+@font-face 
+    font-family gobold
+    src url('../assets/Gobold Regular.otf')
+
 html,body
     width 100%
     height 100%
@@ -196,12 +212,13 @@ html,body
     height 28px
     border-radius 14px
     background #fff
-    border 1px solid rgb(47,85,151)
+    // border 1px solid rgb(47,85,151)
     color rgb(47,85,151)
     font-size 13px
     line-height 25px
     margin-left 50px
     font-weight 600
+    border none
 
 
 .login-btn:hover,
@@ -221,6 +238,33 @@ html,body
 
 .modal-content
     border-radius 14px
+
+.bg-video
+    height 100vh
+    position fixed
+    // z-index -1
+
+.t1
+    font-size 100px
+    position absolute
+    z-index 999
+    color white
+
+.t2
+    font-size 100px
+    position absolute
+    z-index 999
+    color white
+
+.t3
+    font-size 100px
+    position absolute
+    z-index 999
+    color white
+
+
+
+// ************************* home ***********************
 
 // -------- information.vue --------------------------------------------
 
@@ -520,6 +564,21 @@ html,body
 .icons
     padding 100px 0
     margin 0 auto
+
+.c2-img
+    padding-top 100px
+
+.c2-img img
+    max-width 130%
+    object-fit cover
+    object-position center center
+
+.img-wrap
+    height 250px
+    width 250px
+    overflow hidden
+    border-radius 50%
+
 // -------- workout.vue --------------------------------------------
 #workout
     background #fff
@@ -530,6 +589,7 @@ html,body
     left 96px
     right 1%
     width calc(98%-96)
+    overflow scroll
 
 #workout .banner
     background #FFE1B2
@@ -556,7 +616,6 @@ html,body
 .navbar a
     color #000
 
-
 #workout .poseCard
     width 90%
     height 150px
@@ -564,17 +623,33 @@ html,body
     border-radius 10px
     margin 0 10px
     box-shadow 0 5px 15px #FFF0E4
+
+#workout .poseCard2
+    background #E4F3FF
+    box-shadow 0 5px 15px #E4F3FF
+
+#workout .class-sub
+    background linear-gradient(90deg, rgb(47,85,151) 0, rgb(47,85,151) 100%)
+    width 170px
+    height 35px
+    line-height 35px
+    text-align center
+    color #fff
+    text-shadow 0 0 20px #faa
+    border-radius 20px
+    letter-spacing 2px
+    font-size 17px
+    
 // -------- timer.vue --------------------------------------------
 #timer
     background #fff
     height 100%
     border-radius 20px 
     position absolute
-    top 20px
     left 96px
-    right 1%
+    right 0
     width calc(98%-96)
-
+    overflow scroll
 
 
 // -------- 小尺寸 -------------------------------------------------------

@@ -19,11 +19,26 @@
             b-nav-item 肌群鍛鍊
             b-nav-item 伸展與放鬆
             b-nav-item 運動後收操
-        h6.ml-3.my-3 運動前暖身
+        h6.mx-auto.my-5.class-sub 運動前暖身
         b-row
           b-col(col sm='3' v-for="(item, index) in list")
-            div.poseCard
-              p 123
+            div.poseCard.d-flex.justify-content-center.align-items-end.my-3
+              p {{item.title}}
+        h6.mx-auto.my-5.class-sub 肌群鍛鍊
+        b-row
+          b-col(col sm='3' v-for="(item, index) in list")
+            div.poseCard.poseCard2.d-flex.justify-content-center.align-items-end.my-3
+              p {{item.title}}
+        h6.mx-auto.my-5.class-sub 伸展與放鬆
+        b-row
+          b-col(col sm='3' v-for="(item, index) in list")
+            div.poseCard.d-flex.justify-content-center.align-items-end.my-3
+              p {{item.title}}
+        h6.mx-auto.my-5.class-sub 運動後收操
+        b-row
+          b-col(col sm='3' v-for="(item, index) in list")
+            div.poseCard.poseCard2.d-flex.justify-content-center.align-items-end.my-3
+              p {{item.title}}
 
 </template>
 
@@ -31,7 +46,12 @@
 export default {
   data () {
     return {
-      list: [{ id: 1, title: '頸部' }, { id: 2, title: '頭部' }, { id: 3, title: '123' }, { id: 4, title: '123' }]
+      list: [
+        { id: 1, title: '頸部' },
+        { id: 2, title: '肩部' },
+        { id: 3, title: '腰部' },
+        { id: 4, title: '腿部' },
+        { id: 5, title: '四肢關節' }]
     }
   }
 }

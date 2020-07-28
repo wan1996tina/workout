@@ -1,5 +1,6 @@
 <template lang='pug'>
   #workout(ref='info')
+    learning(:v-src="this.video")
     b-container(fluid style='width:95%;')
       b-col.toolbar(cols='12')
         p.subtitle workout
@@ -21,29 +22,32 @@
             b-nav-item 運動後收操
         h6.mx-auto.my-5.class-sub 運動前暖身
         b-row
-          b-col(col sm='3' v-for="(item, index) in list")
+          b-col(col sm='3' v-for="(item, index) in list" @click='learningPage')
             div.poseCard.d-flex.justify-content-center.align-items-end.my-3
               p {{item.title}}
         h6.mx-auto.my-5.class-sub 肌群鍛鍊
         b-row
-          b-col(col sm='3' v-for="(item, index) in list")
+          b-col(col sm='3' v-for="(item, index) in list" @click='learningPage')
             div.poseCard.poseCard2.d-flex.justify-content-center.align-items-end.my-3
               p {{item.title}}
         h6.mx-auto.my-5.class-sub 伸展與放鬆
         b-row
-          b-col(col sm='3' v-for="(item, index) in list")
+          b-col(col sm='3' v-for="(item, index) in list" @click='learningPage')
             div.poseCard.d-flex.justify-content-center.align-items-end.my-3
               p {{item.title}}
         h6.mx-auto.my-5.class-sub 運動後收操
         b-row
-          b-col(col sm='3' v-for="(item, index) in list")
+          b-col(col sm='3' v-for="(item, index) in list" @click='learningPage')
             div.poseCard.poseCard2.d-flex.justify-content-center.align-items-end.my-3
               p {{item.title}}
-
 </template>
 
 <script>
+import learning from './learning'
 export default {
+  components: {
+    learning
+  },
   data () {
     return {
       list: [
@@ -51,7 +55,21 @@ export default {
         { id: 2, title: '肩部' },
         { id: 3, title: '腰部' },
         { id: 4, title: '腿部' },
-        { id: 5, title: '四肢關節' }]
+        { id: 5, title: '四肢關節' }
+      ],
+      video: 'https://www.youtube.com/embed/sTANio_2E0Q',
+      learningData: [
+        { index: '0', src: 'https://www.youtube.com/embed/sTANio_2E0Q' },
+        { index: '0', src: 'https://www.youtube.com/embed/sTANio_2E0Q' },
+        { index: '0', src: 'https://www.youtube.com/embed/sTANio_2E0Q' },
+        { index: '0', src: 'https://www.youtube.com/embed/sTANio_2E0Q' },
+        { index: '0', src: 'https://www.youtube.com/embed/sTANio_2E0Q' }
+      ]
+    }
+  },
+  methods: {
+    learningPage () {
+
     }
   }
 }

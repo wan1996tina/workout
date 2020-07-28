@@ -1,13 +1,13 @@
 <template>
 <!-- :style="{ width : 'calc(' + viewWidth + '%-96)'}" -->
   <div id="home"  ref="home">
-    <b-container fluid style="width:100%; position:relative;" class="p-0">
+    <b-container fluid style="width:100%; position:relative; height:100vh" class="p-0">
       <div class='bg-video'>
         <video src="~@/assets/video.mp4" autoplay muted loop></video>
       </div>
       <div class=" d-flex justify-content-center">
         <b-col cols="9" class="toolbar">
-          <p class="subtitle">Home</p>
+          <p class="subtitle d-none">Home</p>
         </b-col>
         <!-- 登入、註冊、使用者 -->
         <b-col cols="3" class="d-flex justify-content-center align-items-center">
@@ -201,9 +201,10 @@
         </b-col>
       </div>
 
-      <h1 class='t1'>Healthy mind</h1>
-      <h1 class='t2'>in a</h1>
-      <h1 class='t3'>healthy body</h1>
+      <div class='gradient'></div>
+      <p class='t1'>healthy mind</p>
+      <p class='t2'>in a</p>
+      <p class='t3'> healthy body</p>
 
       <!-- 橫幅 -->
       <!-- <b-col col sm="12" lg="8" class="banner my-2">

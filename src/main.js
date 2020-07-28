@@ -18,10 +18,10 @@ import VueEllipseProgress from 'vue-ellipse-progress'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import { faPlay, faCoffee, faHome, faDumbbell, faInfoCircle, faStopwatch, faPhone, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faCoffee, faHome, faDumbbell, faInfoCircle, faStopwatch, faPhone, faMapMarkerAlt, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { faFacebookF, faFacebookSquare, faPinterestP, faInstagram, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons'
-library.add(faPlay, faCoffee, faHome, faDumbbell, faInfoCircle, faStopwatch, faEnvelope, faPhone, faMapMarkerAlt, faFacebookF, faFacebookSquare, faPinterestP, faInstagram, faTwitter, faYoutube)
+library.add(faArrowRight, faArrowLeft, faPlay, faCoffee, faHome, faDumbbell, faInfoCircle, faStopwatch, faEnvelope, faPhone, faMapMarkerAlt, faFacebookF, faFacebookSquare, faPinterestP, faInstagram, faTwitter, faYoutube)
 
 // 註冊元件
 Vue.component('font-awesome-icon', FontAwesomeIcon)

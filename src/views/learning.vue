@@ -2,10 +2,11 @@
     .container-fluid.p-0
       .row.h-100
         //- 左半邊
-        .col-8.text-center.bg-secondary
+        .col-8.text-center
+          h2.my-3 {{ this.$route.params.title }}
           div.video-wrap
             iframe(width='854' height='480' :src='videoSrc' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen)
-            .col-9.bg-light.mx-auto.mt-5
+            .col-9.bg-light.mx-auto.mt-4
               b-nav
                 b-nav-item(v-for="(item, index) in this.navItem" @click="change(item.content)") {{item.content}}
               .nav-content(ref='navContent')
@@ -38,6 +39,9 @@
             .col.prev.text-center
               font-awesome-icon(:icon="['fas','arrow-left']")
               a 上一個
+            .col.toMenu.text-center.d-flex.flex-column.justify-content-center
+              font-awesome-icon(:icon="['fas','home']").d-block.mx-auto.my-2
+              a 回到目錄
             .col.prev.text-center
               a 下一個
               font-awesome-icon(:icon="['fas','arrow-right']")
@@ -50,11 +54,12 @@ import 'hooper/dist/hooper.css'
 
 export default {
   props: {
-    vSrc: String
+    vSrc: String,
+    index: Number
   },
   data () {
     return {
-      videoSrc: this.vSrc,
+      videoSrc: this.$route.params.vSrc,
       steps: ['向兩側平舉張開雙手', '雙腳打開與肩同寬', '確認膝蓋與腳尖同樣朝外', '雙膝彎曲成90度', '上半身向右側轉，同時看向右側'],
       hooperSettings: {
         vertical: true,
@@ -81,7 +86,7 @@ export default {
 <style lang="stylus" scoped>
 .nav-content
   width 100%
-  height 500px
+  height 400px
   background #fff
 
 .go
@@ -201,14 +206,21 @@ export default {
   font-size 23px
   border-right 1px solid #eee
 
+.toMenu
+  background #ffffff
+  height 170px
+  font-size 23px
+  border-right 1px solid #eee
+
 .next
   background #ffffff
   height 170px
   line-height 170px
   font-size 23px
 
-.next:hover
-.prev:hover
+.next:hover,
+.prev:hover,
+.toMenu:hover
   background #E4F3FF
   cursor pointer
 </style>

@@ -18,7 +18,9 @@ export default new Vuex.Store({
     // 是否休息中
     isBreak: false,
     progressNow: 0,
-    viewWidth: 96
+    viewWidth: 96,
+    // 目前登入的使用者
+    user: ''
   },
   mutations: {
     selectAlarm (state, data) {

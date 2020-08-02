@@ -23,6 +23,12 @@ export default new Vuex.Store({
     user: ''
   },
   mutations: {
+    login (state, data) {
+      state.user = data
+    },
+    logout (state) {
+      state.user = ''
+    },
     selectAlarm (state, data) {
       state.alarm = data
     },
@@ -87,6 +93,9 @@ export default new Vuex.Store({
   modules: {
   },
   getters: {
+    user (state) {
+      return state.user
+    },
     alarm (state) {
       return state.alarm
     },

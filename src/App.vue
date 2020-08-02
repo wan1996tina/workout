@@ -48,7 +48,9 @@
       <b-navbar toggleable="lg" type="dark" variant="info">
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-        <b-navbar-brand href="#" class="text-center">Logo</b-navbar-brand>
+        <b-navbar-brand href="#" class="text-center">
+          <img :src="this.logoSrc" alt="" width="100px">
+        </b-navbar-brand>
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav id="nav-sm" class="mr-auto">
@@ -117,7 +119,8 @@ export default {
       side: 'left',
       currentMenu: 'push',
       isBurgerShow: true,
-      width: ''
+      width: '',
+      logoSrc: './img/logo.png'
     }
   },
   components: {

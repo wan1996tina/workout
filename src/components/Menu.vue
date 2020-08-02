@@ -6,7 +6,8 @@
                 <slot></slot>
             </nav>
 
-            <h2 class="logo">Logo</h2>
+            <!-- <h2 class="logo">Logo</h2> -->
+            <img :src="this.logoSrc" alt="" width="40px" class="logo">
 
             <!-- x鈕 hidden 要不要 display:none -->
             <span class="bm-cross-button cross-style" @click="closeMenu" :class="{ hidden: !crossIcon }">
@@ -30,7 +31,8 @@ export default {
       isSideBarOpen: false,
       winWidth: 1920,
       burgerIcon: true,
-      crossIcon: false
+      crossIcon: false,
+      logoSrc: './img/logo.png'
     }
   },
   props: {
@@ -231,13 +233,14 @@ export default {
     }
 
     .logo{
-      width: 100%;
+      /* width: 100%; */
       text-align: center;
       position: absolute;
       top: 0;
       color: white;
-      font-size: 25px;
+      /* font-size: 25px; */
       padding-top: 20px;
+      left: 30px;
     }
 
     .bm-burger-button {

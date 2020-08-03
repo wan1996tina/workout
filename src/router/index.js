@@ -49,6 +49,15 @@ const routes = [
       login: false,
       title: '學習'
     }
+  },
+  {
+    path: '/list',
+    name: 'List',
+    component: () => import(/* webpackChunkName: "list" */ '../views/List.vue'),
+    meta: {
+      login: false,
+      title: '清單'
+    }
   }
 ]
 

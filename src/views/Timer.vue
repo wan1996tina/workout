@@ -1,6 +1,7 @@
 <template>
   <div id="timer" ref="info">
     <b-container fluid style="width:100%;" class='p-0 m-0'>
+      <router-link to="/list">查看清單</router-link>
       <h1>{{currentText}}</h1>
 
       <div class="clock_shadow">

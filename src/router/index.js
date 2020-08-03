@@ -56,6 +56,11 @@ const router = new VueRouter({
   routes
 })
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push (Home) {
+  return originalPush.call(this, Home).catch(err => err)
+}
+
 router.beforeEach((to, from, next) => {
   if (to.meta.login && !StorageEvent.state.user) {
     next('/Home')

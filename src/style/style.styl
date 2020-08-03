@@ -26,7 +26,7 @@ html,body
     width 100%
     height 100%
 
-* 
+*
     margin 0
     padding 0
     list-style none
@@ -37,20 +37,26 @@ html,body
 #app 
     width 100%
     height 100vh
-    position fixed
-    // background #ffa
+    position relative
     overflow hidden
 
-// 底色背景
 .main-content
     width 100%
     height 100%
-    // background-color rgb(47,85,151)
-    // background #999
     position fixed
-    z-index -1
+    top 56px
+
 
 // 選單選項
+#menu
+    background rgb(255,255,255)
+    width 90px
+    height 80%
+    border-radius 15px
+    position absolute
+    top calc(50% - 40vh)
+    left 20px
+
 #menu .nav-item 
     // background-color #F5AF5E
     margin-bottom 15px
@@ -61,7 +67,7 @@ html,body
 
 #menu a
     text-decoration none
-    color #fff
+    color rgb(47,85,151)
 
 #menu .nav-link:hover,
 #menu .nav-link:focus 
@@ -83,14 +89,11 @@ html,body
 
 // 選單按鈕
 .bm-burger-bars
-    background-color white
+    background-color white !important
 
 // 選單展開時的覆蓋背景
 .bm-overlay
     background #fff
-
-.menu-sm
-    display none
 
 .bg-info 
     background-color: rgb(47,85,151)!important;
@@ -101,6 +104,12 @@ html,body
 
 #app .navbar-brand
     margin 0 auto
+
+#nav
+    height 100%
+    display flex 
+    justify-content space-evenly
+    align-items center
 
 .navbar-dark .navbar-toggler 
     color rgba(255,255,255,.5)
@@ -119,23 +128,61 @@ html,body
     display flex
     flex-direction column
     position fixed !important
-    top 4%
-    right 4%
-    height 100vh
-    width 320px
+    top 56px
+    // right 4%
+    width 400px
     max-width 100% !important
-    height 100vh !important
+    height calc(100vh - 56px) !important
     margin 0 !important
     outline 0
     -webkit-transform translateX(0)
     transform translateX(0)
-    background  rgb(224, 236, 255) !important
+    background rgb(224, 236, 255) !important
     transition 0.5s !important
+    z-index 9999
+
+.b-sidebar-body::-webkit-scrollbar 
+    display none
 
 .b-sidebar.b-sidebar-right 
     left: auto;
-    right: 1.5%;
-    border-radius 15px 15px 0 0
+
+.profile
+    width 50%
+    overflow hidden
+    border-radius 500px
+    // background red
+.userImg
+    width 200px
+    height 200px
+    // border-radius 50%
+    position relative
+    overflow hidden
+
+.userPhoto
+    width 200px
+    position absolute
+    bottom 0px
+
+.userList
+    height 40px
+    line-height 40px
+    border-radius 6px
+    margin-bottom 10px
+    text-align center
+
+.menu-sm
+    // display none
+
+.user-options
+    position fixed 
+    top 100px
+    right 20px
+
+.btn-logout
+    margin 20px auto
+    width 60%
+
 
 // ---------- home.vue ----------------------------------------------------------
 #home
@@ -143,7 +190,7 @@ html,body
     height 100%
     border-radius 20px 
     position absolute
-    left 96px
+    left 0
     right 0
     width calc(100%-96)
     overflow-y scroll
@@ -279,6 +326,24 @@ html,body
     position absolute
     background linear-gradient()
 
+#home .btn-user
+    border-radius 50% 
+
+#home .user_name
+    color white
+    font-size 15px
+    text-align center
+    letter-spacing 2px
+
+.btn-editList
+    height 28px
+    line-height 15px
+
+.user-content
+    padding 15px 34px
+
+.list-wrap::-webkit-scrollbar 
+    display none
 
 
 // ************************* home ***********************
@@ -290,9 +355,9 @@ html,body
     height 100%
     border-radius 20px 
     position absolute
-    left 96px
+    left 0
     right 0
-    width calc(100%-96)
+    width 100%
     overflow scroll
 
 #information .banner
@@ -601,9 +666,9 @@ html,body
     background #fff
     height 100%
     position absolute
-    left 96px
+    left 0
     right 0%
-    width calc(98%-96)
+    width 100%
     overflow scroll
 
 #workout .banner
@@ -664,17 +729,15 @@ html,body
     height 100%
     border-radius 20px 
     position absolute
-    left 96px
+    left 0
     right 0
-    width calc(98%-96)
+    width 100%
     overflow scroll
 
 
 // -------- 小尺寸 -------------------------------------------------------
 
 @media(max-width:600px)
-    .menu-sm
-        display block
     #menu 
         display none
     .main-content

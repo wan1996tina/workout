@@ -1,115 +1,196 @@
-<template>
-  <div id="app" ref="app">
-    <div class="main-content" ref="wrap">
-        <router-view/>
-    </div>
-<!-- 大尺寸選單 -->
-    <Menu @data="data" id="menu" ref="menu">
-      <b-nav vertical id="nav" class="mx-auto text-center">
+<template lang="pug">
+  #app(ref='app')
+    .main-content(ref='wrap')
+      router-view
+    //- 大尺寸選單
+    div#menu
+      b-nav#nav.mx-auto.text-center(vertical)
+        b-nav-item
+          router-link(to='/')
+            font-awesome-icon(:icon="['fas', 'home']")
+            span(v-show='!isBurgerShow') Home
+        b-nav-item
+          router-link(to='/workout')
+            font-awesome-icon(:icon="['fas', 'dumbbell']")
+            span(v-show='!isBurgerShow') Workout
+        b-nav-item
+          router-link(to='/information')
+            font-awesome-icon(:icon="['fas', 'info-circle']")
+            span(v-show='!isBurgerShow') About
+        b-nav-item
+          router-link(to='/timer')
+            font-awesome-icon(:icon="['fas', 'stopwatch']")
+            span(v-show='!isBurgerShow') Timer
+      h3 {{this.width}}
+      //- Menu#menu(@data='data' ref='menu')
+    //-小尺寸選單
+    .menu-sm
+      b-navbar(toggleable='lg' type='dark' variant='info' fixed="top")
+        b-navbar-toggle(target='nav-collapse')
+        b-navbar-brand.text-center(href='#') Logo
+          //- img(:src='this.logoSrc' alt width='100px')
+        b-collapse#nav-collapse(is-nav)
+          b-navbar-nav#nav-sm.mr-auto
+            b-nav-item
+              router-link(to='/')
+                font-awesome-icon(:icon="['fas', 'home']")
+                span(v-show='!isBurgerShow') Home
+            b-nav-item
+              router-link(to='/workout')
+                font-awesome-icon(:icon="['fas', 'dumbbell']")
+                span(v-show='!isBurgerShow') Workout
+            b-nav-item
+              router-link(to='/information')
+                font-awesome-icon(:icon="['fas', 'info-circle']")
+                span(v-show='!isBurgerShow') About
+            b-nav-item
+              router-link(to='/timer')
+                font-awesome-icon(:icon="['fas', 'stopwatch']")
+                span(v-show='!isBurgerShow') Timer
+          //-Right aligned nav items
+          b-navbar-nav.mx-auto
+            b-nav-item-dropdown(text='Lang' right)
+              b-dropdown-item(href='#') EN
+              b-dropdown-item(href='#') ES
+              b-dropdown-item(href='#') RU
+              b-dropdown-item(href='#') FA
+            b-nav-item-dropdown(right)
+              //-Using 'button-content' slot
+              template(v-slot:button-content)
+              b-dropdown-item(href='#') Profile
+              b-dropdown-item(href='#') Sign Out
 
-        <b-nav-item>
-          <router-link to="/">
-            <font-awesome-icon :icon="['fas', 'home']"></font-awesome-icon>
-            <span v-show="!isBurgerShow">Home</span>
-          </router-link>
-        </b-nav-item>
+    //-登入、註冊、使用者
+    b-col.d-flex.justify-content-center.align-items-center.user-options(cols='3')
+      //-註冊 button
+      div
+        input.sign-btn(type='button' value='Sign up' v-if='user.length === 0' v-b-modal.modal-prevent-closing1)
+        b-modal#modal-prevent-closing1.d-flex.flex-row(size='lg' :centered='isCenter' footer-class='border-top-0 col-12 mx-auto justify-content-center' hide-footer hide-header)
+          b-row.m-3.mt-4
+            .col-12.col-md-5.mb-4.pt-3.d-flex.justify-content-center.flex-column.align-items-center(style='background:rgb(255, 227, 224); border-radius:12px;')
+              h3(style='color:rgb(100,100,100);') Nice to meet you!
+              p(style='font-size:12px;color:#aaa;') 歡迎加入我們，一起變健康吧!
+              input.login-btn.m-0.my-3(type='button' value='Log in')
 
-        <b-nav-item>
-          <router-link to="/workout">
-            <font-awesome-icon :icon="['fas', 'dumbbell']"></font-awesome-icon>
-            <span v-show="!isBurgerShow">Workout</span>
-          </router-link>
-        </b-nav-item>
+            .col-12.col-md-7
+              b-form(@submit='signUp')
+                h3.text-center 註冊
+                //- 姓名
+                b-form-group(
+                  :state="formState('name')"
+                  label='Name'
+                  label-for='name-input'
+                  invalid-feedback='姓名格式不符'
+                  description='名字可輸入 1 ~ 30 字'
+                )
+                  b-form-input#name-input(
+                    v-model='name'
+                    :state="formState('name')"
+                    required
+                  )
+                //- 帳號
+                b-form-group(
+                  :state="formState('account')"
+                  label='Account'
+                  label-for='account-input'
+                  invalid-feedback='帳號格式不符'
+                  description='帳號可輸入 4 ~ 15 字'
+                )
+                  b-form-input#account-input(
+                    v-model='account'
+                    :state="formState('account')"
+                    required
+                  )
+                //- 密碼
+                b-form-group(
+                  :state="formState('password')"
+                  label='Password'
+                  label-for='password-input'
+                  invalid-feedback='請輸入密碼'
+                )
+                  b-form-input#password-input(
+                    v-model='password'
+                    :state="formState('password')"
+                    required type='password'
+                  )
+                //- 密碼 again
+                b-form-group(
+                  :state="formState('password_again')"
+                  label='Password Again'
+                  label-for='password-input'
+                  invalid-feedback='兩次密碼不相同，請重新確認'
+                  )
+                  b-form-input#password-input(
+                    v-model='password_again'
+                    :state="formState('password_again')"
+                    required
+                    type='password'
+                  )
+                b-button(type="submit" variant='info') 註冊
 
-        <b-nav-item>
-          <router-link to="/information">
-            <font-awesome-icon :icon="['fas', 'info-circle']"></font-awesome-icon>
-            <span v-show="!isBurgerShow">About</span>
-          </router-link>
-        </b-nav-item>
+      //- 登入 button
+      div
+        input.login-btn(type='button' value='Log in' v-if='user.length === 0' v-b-modal.modal-prevent-closing)
+        //-  b-button(v-b-modal.modal-prevent-closing) Open Modal
+        b-modal#modal-prevent-closing.d-flex.flex-row(size='lg' :centered='isCenter' footer-class='border-top-0 col-12 mx-auto justify-content-center' hide-header hide-footer)
+          b-row.m-3.mt-4
+            .col-12.col-md-5.mb-4.pt-3.d-flex.justify-content-center.flex-column.align-items-center(style='background:rgb(224, 236, 255); border-radius:12px;')
+              h3(style='color:rgb(47,85,151);') Welcome back!
+              p(style='font-size:12px;color:#aaa;') 歡迎回來，這是歡迎訊息…
+              input.login-btn.m-0.my-3(type='button' value='Sign up')
+            .col-12.col-md-7(style='height:400px;')
+              b-form(@submit='login')
+                h3.text-center 登入
+                //-  帳號
+                b-form-group.my-5(
+                  :state="formState('user_account')"
+                  label='Account'
+                  label-for='account-input'
+                  invalid-feedback='account is required'
+                )
+                  b-form-input#account-input(
+                    v-model='user_account'
+                    :state="formState('user_account')"
+                    required
+                  )
+                //-  密碼
+                b-form-group(
+                  :state="formState('user_password')"
+                  label='Password'
+                  label-for='password-input'
+                  invalid-feedback='password is required'
+                )
+                  b-form-input#password-input(
+                    v-model='user_password'
+                    :state="formState('user_password')"
+                    required type='password'
+                  )
+                b-button(type="submit" variant='info') 登入
 
-        <b-nav-item>
-          <router-link to="/timer">
-            <font-awesome-icon :icon="['fas', 'stopwatch']"></font-awesome-icon>
-            <span v-show="!isBurgerShow">Timer</span>
-          </router-link>
-        </b-nav-item>
-
-      </b-nav>
-      <h3>{{this.width}}</h3>
-
-      <!-- <router-link to="/">
+      //- 使用者按鈕、使用者資訊
+      div(v-if='user.length > 0')
+        .userBlock.d-flex.justify-content-center.align-items-center
+          b-button(v-b-toggle.sidebar-right).btn-warning.btn-user
+            font-awesome-icon(:icon="[ 'fas', 'user-ninja' ]")
+          p.user_name.m-0.mx-2 Hello! {{username}}
+        b-sidebar#sidebar-right(right)
+          .px-3.py-2
+            .profile.mx-auto
+              .userImg
+                b-img(:src="this.userSrc").userPhoto
+            h4.text-center.my-3 {{username}}
+          .user-content.d-flex.justify-content-between
+            h5.mb-3 我的常用計時器
+            b-button.btn-sm.btn-editList(variant="primary" @click="editUserList") 管理
+          .b-row.h-50.overflow-auto.list-wrap
+            .userList.col-10(v-for="(item, index) of timerList").bg-light.mx-auto
+              p {{item}}
+          div.w-100.text-center
+            b-button(variant='info' @click="logout").btn-logout Log out
+</template>
+<!-- <router-link to="/">
           <font-awesome-icon :icon="['fas', 'home']"></font-awesome-icon>
       </router-link> -->
-    </Menu>
-
-<!-- 小尺寸選單 -->
-    <div class="menu-sm">
-      <b-navbar toggleable="lg" type="dark" variant="info">
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-        <b-navbar-brand href="#" class="text-center">
-          <img :src="this.logoSrc" alt="" width="100px">
-        </b-navbar-brand>
-
-        <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav id="nav-sm" class="mr-auto">
-
-            <b-nav-item>
-              <router-link to="/">
-                <font-awesome-icon :icon="['fas', 'home']"></font-awesome-icon>
-                <span v-show="!isBurgerShow">Home</span>
-              </router-link>
-            </b-nav-item>
-
-            <b-nav-item>
-              <router-link to="/workout">
-                <font-awesome-icon :icon="['fas', 'dumbbell']"></font-awesome-icon>
-                <span v-show="!isBurgerShow">Workout</span>
-              </router-link>
-            </b-nav-item>
-
-            <b-nav-item>
-              <router-link to="/information">
-                <font-awesome-icon :icon="['fas', 'info-circle']"></font-awesome-icon>
-                <span v-show="!isBurgerShow">About</span>
-              </router-link>
-            </b-nav-item>
-
-            <b-nav-item>
-              <router-link to="/timer">
-                <font-awesome-icon :icon="['fas', 'stopwatch']"></font-awesome-icon>
-                <span v-show="!isBurgerShow">Timer</span>
-              </router-link>
-            </b-nav-item>
-
-          </b-navbar-nav>
-
-          <!-- Right aligned nav items -->
-          <b-navbar-nav class="mx-auto">
-
-            <b-nav-item-dropdown text="Lang" right>
-              <b-dropdown-item href="#">EN</b-dropdown-item>
-              <b-dropdown-item href="#">ES</b-dropdown-item>
-              <b-dropdown-item href="#">RU</b-dropdown-item>
-              <b-dropdown-item href="#">FA</b-dropdown-item>
-            </b-nav-item-dropdown>
-
-            <b-nav-item-dropdown right>
-              <!-- Using 'button-content' slot -->
-              <template v-slot:button-content>
-                <em>User</em>
-              </template>
-              <b-dropdown-item href="#">Profile</b-dropdown-item>
-              <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-            </b-nav-item-dropdown>
-          </b-navbar-nav>
-        </b-collapse>
-      </b-navbar>
-    </div>
-  </div>
-</template>
-
 <script>
 import Menu from './components/Menu'
 
@@ -120,7 +201,15 @@ export default {
       currentMenu: 'push',
       isBurgerShow: true,
       width: '',
-      logoSrc: './img/logo.png'
+      logoSrc: './img/logo.png',
+      name: '',
+      account: '',
+      password: '',
+      password_again: '',
+      user_account: '',
+      user_password: '',
+      isCenter: true,
+      userSrc: './img/user.jpg'
     }
   },
   components: {
@@ -129,8 +218,110 @@ export default {
   methods: {
     data (data) {
       this.isBurgerShow = data
-    }
+    },
+    formState (type) {
+      // 註冊驗證
+      if (type === 'name') {
+        if (this.name.length < 1 || this.name.length > 30) {
+          return false
+        } else {
+          return true
+        }
+      } else if (type === 'account') {
+        if (this.account.length < 4 || this.account.length > 15) {
+          return false
+        } else {
+          return true
+        }
+      } else if (type === 'password') {
+        if (this.password.length > 0) {
+          return true
+        } else {
+          return false
+        }
+      } else if (type === 'password_again') {
+        if (this.password_again.length > 0 && this.password_again === this.password) {
+          return true
+        } else {
+          return false
+        }
+      }
 
+      // 登入驗證
+      if (type === 'user_account') {
+        if (this.user_account.length < 4 || this.user_account.length > 15) {
+          return false
+        } else {
+          return true
+        }
+      } else if (type === 'user_password') {
+        if (this.user_password.length > 0) {
+          return true
+        } else {
+          return false
+        }
+      }
+    },
+    signUp (event) {
+      event.preventDefault()
+      if (this.account.length < 4 || this.account.length > 15) {
+        alert('帳號格式不符')
+      } else if (!this.password.length > 0) {
+        alert('請輸入密碼')
+      }
+      this.axios.post(
+        process.env.VUE_APP_APIURL + '/users',
+        { name: this.name, account: this.account, password: this.password }
+      )
+        .then(response => {
+          const data = response.data
+          if (data.success) {
+            // 如果回來的資料 success 是 true
+            alert('註冊成功')
+          } else {
+            // 不是就顯示回來的 message
+            alert(data.message)
+          }
+        })
+        .catch(error => {
+          // 如果回來的狀態不是 200，顯示回來的 message
+          alert(error.response.data.message)
+        })
+    },
+    login (event) {
+      event.preventDefault()
+      if (this.user_account.length < 4 || this.user_account.length > 15) {
+        alert('帳號格式不符')
+      } else if (!this.user_password.length > 0) {
+        alert('請輸入密碼')
+      }
+      this.axios.post(
+        process.env.VUE_APP_APIURL + '/login',
+        { account: this.user_account, password: this.user_password }
+      )
+        .then(response => {
+          const data = response.data
+          if (data.success) {
+            // 如果回來的資料 success 是 true
+            alert('登入成功')
+            this.$store.commit('login', [this.user_account, data.message])
+            this.$router.push('/')
+          } else {
+            // 不是就顯示回來的 message
+            alert(data.message)
+          }
+        })
+        .catch(error => {
+          // 如果回來的狀態不是 200，顯示回來的 message
+          alert(error.response.data.message)
+        })
+    },
+    logout () {
+      this.$store.commit('logout')
+    },
+    editUserList () {
+
+    }
   },
   watch: {
     changeWidth () {
@@ -140,12 +331,21 @@ export default {
   computed: {
     getWidth () {
       return this.$store.getters.sidebarWidth
+    },
+    user () {
+      return this.$store.getters.user
+    },
+    username () {
+      return this.$store.getters.username
+    },
+    timerList () {
+      return this.$store.getters.timerList
     }
   },
   mounted () {
-    const width = this.$refs.menu.$refs.sideNav.clientWidth
-    this.width = width
-    console.log(this.width)
+    // const width = this.$refs.menu.$refs.sideNav.clientWidth
+    // this.width = width
+    // console.log(this.width)
     // console.log(this.$refs.menu.$refs.sideNav)
   }
 }

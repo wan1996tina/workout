@@ -9,6 +9,7 @@ const timeleftBreak = parseInt(process.env.VUE_APP_TIMELEFT_BREAK)
 export default new Vuex.Store({
   state: {
     todos: [],
+    timerList: ['肩膀放鬆', '頸部放鬆', '我的計時器 1', '我的計時器 2', '我的計時器 3', '我的計時器 4', '我的計時器 5', '我的計時器 6', '我的計時器 7', '我的計時器 8', '我的計時器 9', '我的計時器 10', '我的計時器 11'],
     // 剩多少時間
     timeleft,
     // 可選鈴聲
@@ -20,11 +21,13 @@ export default new Vuex.Store({
     progressNow: 0,
     viewWidth: 96,
     // 目前登入的使用者
-    user: ''
+    user: '',
+    username: ''
   },
   mutations: {
     login (state, data) {
-      state.user = data
+      state.user = data[0]
+      state.username = data[1]
     },
     logout (state) {
       state.user = ''
@@ -93,8 +96,14 @@ export default new Vuex.Store({
   modules: {
   },
   getters: {
+    timerList (state) {
+      return state.timerList
+    },
     user (state) {
       return state.user
+    },
+    username (state) {
+      return state.username
     },
     alarm (state) {
       return state.alarm

@@ -22,7 +22,8 @@ export default new Vuex.Store({
     viewWidth: 96,
     // 目前登入的使用者
     user: '',
-    username: ''
+    username: '',
+    workoutStep: []
   },
   mutations: {
     login (state, data) {
@@ -89,6 +90,12 @@ export default new Vuex.Store({
     },
     changeWidth (state, data) {
       state.viewWidth = data
+    },
+    addSec (state, data) {
+      state.workoutStep.push(data)
+    },
+    clearSec (state) {
+      state.workoutStep = ''
     }
   },
   actions: {
@@ -125,6 +132,9 @@ export default new Vuex.Store({
     },
     getWidth (state) {
       return state.viewWidth
+    },
+    workoutStep (state) {
+      return state.workoutStep
     }
   },
   plugins: [createPersistedState()]

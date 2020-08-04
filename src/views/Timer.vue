@@ -29,6 +29,7 @@
           font-awesome-icon(:icon="['fas','pause']")
         b-btn.mx-1(variant='outline-dark' size='lg' v-if='current.length > 0 || todos.length > 0' @click='finish(true)' style='z-index:2;')
           font-awesome-icon(:icon="['fas','step-forward']")
+      //- 計時器側邊欄
       div
         //- b-button(v-b-toggle.sidebar-backdrop) options
         b-sidebar#sidebar-backdrop(title='' right)
@@ -36,18 +37,30 @@
             div.d-flex
               b-button.mr-2.btn-addTimer(variant="info")
                 font-awesome-icon(:icon="['fas', 'plus']")
-              b-form-input(placeholder="Add a new timer...")
+              b-form-input(placeholder="Add a new timer..." v-model="newTimerName")
             div.d-flex.flex-column
               h5 計時步驟
               b-row.p-3
                 b-col.p-0(cols='10')
-                  b-form-select(v-model='selected' :options='variants')
+                  b-form-select(v-model='selected' :options='seconds')
                 b-col(cols='2')
-                  b-button(variant="light")
+                  //- 新增秒數的按鈕
+                  b-button(variant="light" @click="addSec")
                     font-awesome-icon(:icon="['fas', 'plus']")
-
-            //- b-form-group(label='計時步驟')
-            //-   b-form-select(v-model='selected' :options='variants')
+              .new-steps
+                .step(v-for="(step, index) in workoutStep") {{step}}
+                  .next-icon
+                    font-awesome-icon(:icon="['fas', 'angle-right']")
+            div.d-flex.align-items-center
+              b-col.p-0(cols='4')
+                h5 循環次數
+              b-col.p-0(cols='6')
+                b-form-select(v-model='selectedTimes' :options='times')
+              b-col(cols='2') 次
+            b-row.justify-content-around
+              b-button(variant="info" @click="resetTimer") 重設
+              b-button(variant="info" @click='addNewTimer') 完成
+              b-button(variant="info" v-if="user.length > 0") 儲存
 </template>
       <!-- <div class="clock_shadow">
         <div class="shadow_in"></div>
@@ -74,8 +87,30 @@
 export default {
   data () {
     return {
+      newTimerName: '',
       selected: null,
-      variants: [{ value: null, text: '' }],
+      seconds: [
+        { value: null, text: '選擇秒數' },
+        { value: [5, '5秒'], text: '5秒' },
+        { value: [10, '10秒'], text: '10秒' },
+        { value: [15, '15秒'], text: '15秒' },
+        { value: [20, '20秒'], text: '20秒' },
+        { value: [25, '25秒'], text: '25秒' },
+        { value: [30, '30秒'], text: '30秒' },
+        { value: [45, '45秒'], text: '45秒' },
+        { value: [60, '1分鐘'], text: '1分鐘' },
+        { value: [120, '2分鐘'], text: '2分鐘' }
+      ],
+      // workoutStep: [],
+      selectedTimes: null,
+      times: [
+        { value: null, text: '選擇次數' },
+        { value: 1, text: '1' },
+        { value: 2, text: '2' },
+        { value: 3, text: '3' },
+        { value: 4, text: '4' },
+        { value: 5, text: '5' }
+      ],
       // 0 = 停止
       // 1 = 播放
       // 2 = 暫停
@@ -152,6 +187,12 @@ export default {
     progressNow () {
       return this.$store.getters.progressNow
     },
+    user () {
+      return this.$store.getters.user
+    },
+    workoutStep () {
+      return this.$store.getters.workoutStep
+    },
     anim: function () {
       return {
         dispaly: 'block',
@@ -213,6 +254,24 @@ export default {
     pause () {
       clearInterval(this.timer)
       this.status = 2
+    },
+    addSec () {
+      // this.workoutStep.push(this.selected[1])
+      if (this.selected === null) {
+        alert('請選擇秒數')
+      } else {
+        this.$store.commit('addSec', this.selected[1])
+        this.selected = null
+      }
+    },
+    resetTimer () {
+      this.newTimerName = ''
+      this.$store.commit('clearSec')
+      this.selectedTimes = null
+      this.selected = null
+    },
+    addNewTimer () {
+
     }
   }
 }

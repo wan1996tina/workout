@@ -769,7 +769,7 @@ html,body
     border-radius 6px
 
 .numBg h1
-    font-size 180px
+    font-size 150px
     font-weight 800
     color #333 !important
 
@@ -794,7 +794,7 @@ html,body
 .timer-title
     position relative
     color white !important
-    font-size 38px
+    font-size 35px
 
 .timer-title::before
     content ''
@@ -813,13 +813,39 @@ html,body
 
 .add-item-block
     background #ccc
-    height 40%
+    height 50%
     display flex
     flex-direction column
     justify-content space-evenly
 
 .btn-addTimer
     border-radius 50%
+
+.step
+    width 60px
+    height 30px
+    line-height 30px
+    margin 10px 20px
+    background #ffa
+    flex-shrink 0
+    border-radius 3px
+    text-align center
+    position relative
+.next-icon
+    position absolute
+    right -25px
+    top 0
+
+.new-steps
+    width 100%
+    height 80px
+    // background #eee
+    overflow scroll
+    display flex
+    margin 10px 0
+
+.new-steps::-webkit-scrollbar
+    // display none
 // -------- 小尺寸 -------------------------------------------------------
 
 @media(max-width:600px)

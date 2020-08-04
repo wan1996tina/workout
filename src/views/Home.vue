@@ -1,25 +1,20 @@
 <template lang="pug">
   #home(ref='home')
-    b-container.p-0(fluid style='width:100%; position:relative; height:100vh')
+    b-container.m-0.p-0(fluid style='width:100vw; position:relative; height:100vh')
       .bg-video
         video(src='~@/assets/video.mp4' autoplay muted loop)
-      .d-flex.justify-content-center
-        b-col.toolbar(cols='9')
-          p.subtitle.d-none Home
       .gradient
-      p.t1 healthy mind
-      p.t2 in a
-      p.t3 healthy body
-
-      //- 橫幅
-      //- b-col.banner.my-2(col sm='12' lg='8')
-      //-   h1 Dare to be great.
-      //-   p Workout at home
-      //- .bg-info.my-5(style='width:60%;')
-      //-   b-col.card.bg-danger
-      //-     .imgWrap
-      //-       img.img-fluid(src='https://picsum.photos/300/200/?random=1')
-      //-     h5.my-4 第一個
+        p.t1 healthy mind
+        p.t2 in a
+        p.t3 healthy body
+      b-col.vh-100
+        //- 橫幅
+      div.vh-100.home-content
+        b-row.my-5.w-75.mx-auto
+          b-col.banner.p-0(col sm='12' lg='6')
+            img(:src="this.imgSrc[0]" width="800px")
+          b-col.mx-auto(col sm='12' lg='6')
+            h1 Dare to be great.
 
       //- .wrap-hooper.col-7
       //-   hooper(:settings='hooperSettings')
@@ -63,7 +58,8 @@ export default {
         centerMode: true,
         autoPlay: true,
         playSpeed: 2000
-      }
+      },
+      imgSrc: ['./img/home1.jpg', '', '', '', '', '', '', '']
     }
   },
   computed: {

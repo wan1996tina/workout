@@ -1,9 +1,55 @@
-<template>
-  <div id="timer" ref="info">
-    <b-container fluid style="width:100%;" class='p-0 m-0'>
-      <h1>{{currentText}}</h1>
+<template lang='pug'>
+  #timer(ref='info')
+    b-container.p-0.m-0(fluid style='width:100%;')
+      h1.timer-title {{currentText}}
+      #clock.d-flex.justify-content-center
+        .clockBg
+          b-col(cols='4').numBg
+            h1 {{ time_min }}
+          .mx-5
+            .dot
+            .dot
+          b-col(cols='4').numBg
+            h1 {{ time_sec }}
+          b-row.timer-tools.align-items-center.flex-column
+            div
+              router-link(to="" v-b-toggle.sidebar-backdrop).m-3
+                font-awesome-icon(:icon="['fas', 'plus']")
+            div
+              router-link(to="" v-b-toggle.sidebar-backdrop).m-3
+                font-awesome-icon(:icon="['fas', 'cog']")
+            div
+              router-link(to="/list" v-b-toggle.sidebar-backdrop).m-3
+                font-awesome-icon(:icon="['fas', 'list-ul']")
+      br
+      .d-flex.flex-row
+        b-btn.mx-1(variant='outline-dark' size='lg' v-if='status != 1' @click='start' style='z-index:2;')
+          font-awesome-icon(:icon="['fas','play']")
+        b-btn.mx-1(variant='outline-dark' size='lg' v-if='status == 1' @click='pause' style='z-index:2;')
+          font-awesome-icon(:icon="['fas','pause']")
+        b-btn.mx-1(variant='outline-dark' size='lg' v-if='current.length > 0 || todos.length > 0' @click='finish(true)' style='z-index:2;')
+          font-awesome-icon(:icon="['fas','step-forward']")
+      div
+        //- b-button(v-b-toggle.sidebar-backdrop) options
+        b-sidebar#sidebar-backdrop(title='' right)
+          .add-item-block.px-3.py-2
+            div.d-flex
+              b-button.mr-2.btn-addTimer(variant="info")
+                font-awesome-icon(:icon="['fas', 'plus']")
+              b-form-input(placeholder="Add a new timer...")
+            div.d-flex.flex-column
+              h5 計時步驟
+              b-row.p-3
+                b-col.p-0(cols='10')
+                  b-form-select(v-model='selected' :options='variants')
+                b-col(cols='2')
+                  b-button(variant="light")
+                    font-awesome-icon(:icon="['fas', 'plus']")
 
-      <div class="clock_shadow">
+            //- b-form-group(label='計時步驟')
+            //-   b-form-select(v-model='selected' :options='variants')
+</template>
+      <!-- <div class="clock_shadow">
         <div class="shadow_in"></div>
         <vep
         :progress="progressNow"
@@ -23,28 +69,13 @@
           <span>{{ time_sec }}</span>
           </span>
         </vep>
-      </div>
-        <br>
-      <div class="d-flex flex-row">
-        <b-btn variant="outline-dark" class="mx-1" size="lg" v-if="status != 1" @click="start" style="z-index:2;">
-          <font-awesome-icon :icon="['fas','play']"></font-awesome-icon>
-        </b-btn>
-        <b-btn variant="outline-dark" class="mx-1" size="lg" v-if="status == 1" @click="pause" style="z-index:2;">
-          <font-awesome-icon :icon="['fas','pause']"></font-awesome-icon>
-        </b-btn>
-        <b-btn variant="outline-dark" class="mx-1" size="lg" v-if="current.length > 0 || todos.length > 0" @click="finish(true)" style="z-index:2;">
-          <font-awesome-icon :icon="['fas','step-forward']"></font-awesome-icon>
-        </b-btn>
-      </div>
-
-    </b-container>
-  </div>
-</template>
-
+      </div> -->
 <script>
 export default {
   data () {
     return {
+      selected: null,
+      variants: [{ value: null, text: '' }],
       // 0 = 停止
       // 1 = 播放
       // 2 = 暫停
@@ -74,13 +105,12 @@ export default {
           ]
         },
         animation: 'default 200 200'
-      },
-      addAnim: 'false'
+      }
     }
   },
   computed: {
     currentText () {
-      return this.current.length > 0 ? this.current : this.todos.length > 0 ? '點擊開始番茄鐘' : '目前沒有事項'
+      return this.current.length > 0 ? this.current : this.todos.length > 0 ? '開始鍛鍊' : '目前沒有事項'
     },
     timetext () {
       let m = Math.floor(this.timeleft / 60)

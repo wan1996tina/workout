@@ -1,11 +1,11 @@
 <template lang='pug'>
   #workout(ref='info')
     //- learning(:v-src="this.video")
-    b-container(fluid style='width:95%;')
+    b-container
       b-col.toolbar(cols='12')
-        p.subtitle workout
+        p.subtitle
       h5.m-4 Newest
-      b-col.banner.my-2.p-5(col sm='12' lg='7')
+      b-col.banner.my-2.p-5(cols='12')
         b-row.w-100
           b-col(col sm='8')
             h1.title Use it or lose it.

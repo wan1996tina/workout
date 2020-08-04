@@ -46,10 +46,9 @@ html,body
     position fixed
     top 56px
 
-
 // 選單選項
 #menu
-    background rgb(255,255,255)
+    background #bbb
     width 90px
     height 80%
     border-radius 15px
@@ -67,7 +66,7 @@ html,body
 
 #menu a
     text-decoration none
-    color rgb(47,85,151)
+    color white
 
 #menu .nav-link:hover,
 #menu .nav-link:focus 
@@ -129,7 +128,6 @@ html,body
     flex-direction column
     position fixed !important
     top 56px
-    // right 4%
     width 400px
     max-width 100% !important
     height calc(100vh - 56px) !important
@@ -174,25 +172,28 @@ html,body
 .menu-sm
     // display none
 
-.user-options
-    position fixed 
-    top 100px
-    right 20px
-
 .btn-logout
     margin 20px auto
     width 60%
 
+#nav-sm,
+#user-option
+    display none
 
+.home-content
+    background #fff
+    position absolute
+    width 100%
+    right 0
+    
 // ---------- home.vue ----------------------------------------------------------
 #home
     background #fff
     height 100%
-    border-radius 20px 
     position absolute
     left 0
     right 0
-    width calc(100%-96)
+    width 100%
     overflow-y scroll
     overflow-x hidden
 
@@ -204,13 +205,23 @@ html,body
 
 #home .banner
     background #eee
-    height 300px
-    border-radius 20px
+    height 400px
     box-shadow 0px 10px 20px rgba(50,50,50,0.1)
     color #444
-    display flex
-    justify-content flex-start
-    align-items center
+    object-fit fill
+    object-position center center
+    overflow hidden
+    position relative
+
+#home .banner::before
+    content ''
+    position absolute
+    background rgba(127, 255, 245, 0.7)
+    z-index 999
+    width 300px
+    height 300px
+    border-radius 20px
+    transform rotate(45deg)
 
 .subtitle 
     font-size 22px
@@ -267,14 +278,12 @@ html,body
     font-weight 600
     border none
 
-
 .login-btn:hover,
 .sign-btn:hover
     background #ddd
     color #000
     transition 0.3s ease-in
     border-color #ddd
-
 
 .login-btn:focus,
 .sign-btn:focus
@@ -323,13 +332,12 @@ html,body
 .gradient
     width 100%
     height 100vh
-    position absolute
-    background linear-gradient()
+    position fixed
 
-#home .btn-user
+#app .btn-user
     border-radius 50% 
 
-#home .user_name
+#login_title p
     color white
     font-size 15px
     text-align center
@@ -344,7 +352,6 @@ html,body
 
 .list-wrap::-webkit-scrollbar 
     display none
-
 
 // ************************* home ***********************
 
@@ -458,7 +465,6 @@ html,body
     left -60px
     top -72px
     letter-spacing 8px
-
 
 .num1::after
     content ""
@@ -578,7 +584,8 @@ html,body
     padding 15px 0
     color #6C443C
 
-.info  h4,p
+.info h4,
+.info p
     font-family 'Oswald','Microsoft JhengHei'
     color #6C443C
 
@@ -682,7 +689,7 @@ html,body
     align-items center
     margin-left 20px
 
-.banner .title
+#workout .banner .title
     text-align center
     line-height 300px
     color #6C443C
@@ -727,17 +734,98 @@ html,body
 #timer
     background #fff
     height 100%
-    border-radius 20px 
     position absolute
     left 0
     right 0
     width 100%
     overflow scroll
+    position relative
 
+#timer::-webkit-scrollbar 
+    display none
 
+.timer-tools
+    background #FFD98D
+    font-size 28px
+    position absolute
+    top 50%
+    transform translateY(-50%)
+    right 15px
+    // padding 50px 0
+    height 50%
+    border-radius 5px
+    justify-content space-evenly
+
+.timer-tools a
+    color #6C443C
+
+.numBg
+    height 300px
+    background #fff
+    display flex
+    justify-content center
+    align-items center
+    box-shadow 0 15px 15px rgba(50,50,50,0.1)
+    border-radius 6px
+
+.numBg h1
+    font-size 180px
+    font-weight 800
+    color #333 !important
+
+.clockBg
+    width 56%
+    height 100%
+    display flex
+    justify-content center
+    align-items center
+    background #FFF8DF
+    border-radius 6px
+    box-shadow 0 15px 15px rgba(50,50,50,0.1)
+    position relative
+
+.dot
+    width 18px
+    height 18px
+    background #333
+    margin 20px 0
+    border-radius 3px
+
+.timer-title
+    position relative
+    color white !important
+    font-size 38px
+
+.timer-title::before
+    content ''
+    position absolute
+    width 120%
+    height 120%
+    background #666
+    border-radius 7px
+    z-index -1
+    left -10%
+    top -10%
+
+#clock
+    width 100%
+    height 45%
+
+.add-item-block
+    background #ccc
+    height 40%
+    display flex
+    flex-direction column
+    justify-content space-evenly
+
+.btn-addTimer
+    border-radius 50%
 // -------- 小尺寸 -------------------------------------------------------
 
 @media(max-width:600px)
+    #nav-sm,
+    #user-option
+        display block
     #menu 
         display none
     .main-content
@@ -803,6 +891,9 @@ html,body
     #workout .banner .title
         line-height 300px
         font-size 30px
+    .sign-btn,
+    .login-btn
+        display none
 
 .images 
     height 90%

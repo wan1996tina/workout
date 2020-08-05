@@ -3,27 +3,28 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
-const timeleft = parseInt(process.env.VUE_APP_TIMELEFT)
-const timeleftBreak = parseInt(process.env.VUE_APP_TIMELEFT_BREAK)
+// const timeleft = parseInt(process.env.VUE_APP_TIMELEFT)
+// const timeleftBreak = parseInt(process.env.VUE_APP_TIMELEFT_BREAK)
 
 export default new Vuex.Store({
   state: {
     todos: [],
-    timerList: ['肩膀放鬆', '頸部放鬆', '我的計時器 1', '我的計時器 2', '我的計時器 3', '我的計時器 4', '我的計時器 5', '我的計時器 6', '我的計時器 7', '我的計時器 8', '我的計時器 9', '我的計時器 10', '我的計時器 11'],
-    // 剩多少時間
-    timeleft,
-    // 可選鈴聲
+    // timerList: ['肩膀放鬆', '頸部放鬆', '我的計時器 1', '我的計時器 2', '我的計時器 3', '我的計時器 4', '我的計時器 5', '我的計時器 6', '我的計時器 7', '我的計時器 8', '我的計時器 9', '我的計時器 10', '我的計時器 11'],
+    timerList: [],
+    timeleft: 0,
     alarm: 'alarm1.mp3',
-    // 目前
     current: '',
-    // 是否休息中
     isBreak: false,
     progressNow: 0,
     viewWidth: 96,
-    // 目前登入的使用者
+    // 帳號
     user: '',
+    // 姓名
     username: '',
-    workoutStep: []
+    workoutStep: [],
+    workoutStepNum: [],
+    newTimerName: '',
+    currentTimer: []
   },
   mutations: {
     login (state, data) {
@@ -37,7 +38,7 @@ export default new Vuex.Store({
       state.alarm = data
     },
     addTodo (state, data) {
-      state.todos.push({ name: data, edit: false, model: data })
+      state.todos.push({ name: data.name, steps: data.steps, edit: false, model: data })
     },
     dragTodo (state, data) {
       state.todos = data
@@ -57,13 +58,16 @@ export default new Vuex.Store({
       state.todos[data].name = state.todos[data].model
     },
     start (state) {
-      if (state.isBreak) {
-        state.current = '休息一下'
-      } else if (!state.isBreak) {
-        state.showProgress = 0
-        state.current = state.todos[0].name
-        state.todos.splice(0, 1)
-      }
+      // if (state.isBreak) {
+      //   state.current = '休息一下'
+      // } else if (!state.isBreak) {
+      //   state.showProgress = 0
+      //   state.current = state.todos[0].name
+      //   state.todos.splice(0, 1)
+      // }
+      state.currentTimer = state.todos[0].model
+      state.current = state.currentTimer.name
+      state.timeleft = state.currentTimer.steps[0]
     },
     countdown (state, data) {
       state.timeleft--
@@ -73,11 +77,21 @@ export default new Vuex.Store({
       }
     },
     finish (state) {
-      if (state.todos.length > 0) {
-        state.isBreak = !state.isBreak
+      // if (state.todos.length > 0) {
+      //   state.isBreak = !state.isBreak
+      // }
+
+      // 完成一個小倒數
+      state.currentTimer.steps.splice(0, 1)
+      if (state.currentTimer.steps.length === 0) {
+        state.todos.splice(0, 1)
+        if (state.todos.length === 0) {
+          state.current = '目前沒有事項'
+          state.timeleft = 0
+          state.currentTimer = []
+        }
       }
-      state.current = ''
-      state.timeleft = state.isBreak ? timeleftBreak : timeleft
+      // state.timeleft = state.isBreak ? timeleftBreak : timeleft
     },
     showProgress (state, data) {
       state.progressNow += data
@@ -94,8 +108,18 @@ export default new Vuex.Store({
     addSec (state, data) {
       state.workoutStep.push(data)
     },
+    addSecNum (state, data) {
+      state.workoutStepNum.push(data)
+    },
     clearSec (state) {
-      state.workoutStep = ''
+      state.workoutStep = []
+      state.workoutStepNum = []
+    },
+    setNewTimerName (state, data) {
+      state.newTimerName = data
+    },
+    setTimerList (state, data) {
+      state.timerList = data
     }
   },
   actions: {
@@ -135,6 +159,12 @@ export default new Vuex.Store({
     },
     workoutStep (state) {
       return state.workoutStep
+    },
+    workoutStepNum (state) {
+      return state.workoutStepNum
+    },
+    newTimerName (state) {
+      return state.newTimerName
     }
   },
   plugins: [createPersistedState()]

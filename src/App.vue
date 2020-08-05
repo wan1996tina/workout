@@ -351,10 +351,21 @@ export default {
       return this.$store.getters.username
     },
     timerList () {
-      return this.$store.getters.timerList
+      return this.$store.getters.timerList.map(item => item.name)
+      // return this.$store.getters.timerList.map(item => item.name)
     }
   },
   mounted () {
+    const user = this.$store.getters.user
+    this.axios.get(process.env.VUE_APP_APIURL + '/get_timer/' + user)
+      .then(response => {
+        console.log(response.data.result[0].timerList)
+        this.$store.commit('setTimerList', response.data.result[0].timerList)
+      })
+      .catch(() => {
+        alert('發生錯誤')
+      })
+
     // const width = this.$refs.menu.$refs.sideNav.clientWidth
     // this.width = width
     // console.log(this.width)

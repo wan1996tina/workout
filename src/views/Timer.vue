@@ -27,7 +27,7 @@
           font-awesome-icon(:icon="['fas','play']")
         b-btn.mx-1(variant='outline-dark' size='lg' v-if='status == 1' @click='pause' style='z-index:2;')
           font-awesome-icon(:icon="['fas','pause']")
-        b-btn.mx-1(variant='outline-dark' size='lg' v-if='current.length > 0 || todos.length > 0' @click='finish(true)' style='z-index:2;')
+        b-btn.mx-1(variant='outline-dark' size='lg' v-if='todos.length > 1' @click='finish(true)' style='z-index:2;')
           font-awesome-icon(:icon="['fas','step-forward']")
       //- 計時器側邊欄
       div
@@ -58,9 +58,9 @@
                 b-form-select(v-model='selectedTimes' :options='times')
               b-col(cols='2') 次
             b-row.justify-content-around
-              b-button(variant="info" @click="resetTimer") 重設
-              b-button(variant="info" @click='addNewTimer') 完成
-              b-button(variant="info" v-if="user.length > 0") 儲存
+              b-button(variant="danger" @click="resetTimer") 重設計時器
+              b-button(variant="success" @click='addNewTimer') 新增到清單
+              b-button(variant="warning" v-if="user.length > 0" @click="saveTimer") 儲存到常用
 </template>
       <!-- <div class="clock_shadow">
         <div class="shadow_in"></div>
@@ -87,7 +87,7 @@
 export default {
   data () {
     return {
-      newTimerName: '',
+      // newTimerName: '',
       selected: null,
       seconds: [
         { value: null, text: '選擇秒數' },
@@ -153,21 +153,21 @@ export default {
       if (m / 10 <= 0) {
         m = '0' + m
       }
-      if (s / 10 > 0) {
+      if (s / 10 < 0) {
         s = '0' + s
       }
       return `${m}:${s}`
     },
     time_min () {
       let m = Math.floor(this.timeleft / 60)
-      if (m / 10 <= 0) {
+      if (m / 10 < 1) {
         m = '0' + m
       }
       return m
     },
     time_sec () {
       let s = Math.floor(this.timeleft % 60)
-      if (s / 10 > 0) {
+      if (s / 10 < 1) {
         s = '0' + s
       }
       return s
@@ -193,12 +193,15 @@ export default {
     workoutStep () {
       return this.$store.getters.workoutStep
     },
-    anim: function () {
-      return {
-        dispaly: 'block',
-        backgroundColor: 'rgba()',
-        width: '',
-        height: ''
+    workoutStepNum () {
+      return this.$store.getters.workoutStepNum
+    },
+    newTimerName: {
+      get () {
+        return this.$store.getters.newTimerName
+      },
+      set (value) {
+        this.$store.commit('setNewTimerName', value)
       }
     }
   },
@@ -248,7 +251,7 @@ export default {
       if (this.todos.length > 0) {
         this.start()
       } else {
-        alert('結束')
+        alert('鍛鍊結束')
       }
     },
     pause () {
@@ -261,6 +264,7 @@ export default {
         alert('請選擇秒數')
       } else {
         this.$store.commit('addSec', this.selected[1])
+        this.$store.commit('addSecNum', this.selected[0])
         this.selected = null
       }
     },
@@ -271,7 +275,39 @@ export default {
       this.selected = null
     },
     addNewTimer () {
-
+      const times = this.selectedTimes
+      const steps = this.$store.getters.workoutStepNum
+      const timerItem = { name: this.$store.getters.newTimerName, steps: [] }
+      if (this.$store.getters.newTimerName.length === 0) {
+        alert('請輸入計時器名稱')
+      } else if (steps === null) {
+        alert('請選擇秒數')
+      } else if (times === null) {
+        alert('請選擇次數')
+      } else {
+        for (let i = 0; i < times; i++) {
+          for (let k = 0; k < steps.length; k++) {
+            timerItem.steps.push(steps[k])
+          }
+        }
+        this.$store.commit('addTodo', timerItem)
+        this.newTimerName = ''
+        this.$store.commit('clearSec')
+        this.selectedTimes = null
+        this.selected = null
+      }
+    },
+    saveTimer () {
+      const user = this.$store.getters.user
+      const timers = this.$store.getters.timerList
+      this.axios.patch(process.env.VUE_APP_APIURL + '/save_timer/' + user, { timerList: timers })
+        .then(response => {
+          // image.edit = false
+          // image.title = image.model
+        })
+        .catch(() => {
+          alert('發生錯誤')
+        })
     }
   }
 }

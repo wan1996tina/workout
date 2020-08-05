@@ -16,34 +16,40 @@
       b-container.content1
         div.num1
         div.text-center.mx-auto.c1-title PURPOSE
-        h4.box-1-title.mx-auto Dare to be great.
-        b-col.box-1(col md="8" lg="10") Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate excepturi deleniti dolorem eaque cumque! Vitae quos ex repellat. Cupiditate officiis soluta quidem provident voluptatem laudantium tempore quia corporis obcaecati praesentium. Ad ab omnis earum quod nesciunt quaerat assumenda. Quo vel similique laborum necessitatibus eligendi omnis hic, maxime beatae, quae dolorem asperiores perferendis.
+        h4.box-1-title DARE TO BE GREAT.
+        div.box-1 鍛鍊沒有什麼理由，可以只是為了變成更好的自己!我們的核心理念在於提供人們一個能夠隨時開始鍛鍊的環境，不論是熱愛運動的你，還是因為疫情無法出門的你，我們都希望能藉由提供簡單的動作教學，以及可以配合鍛鍊使用的計時器，達到改善人們體態、使身心平衡與放鬆的成效，現在，還有什麼理由繼續懶下去呢?快一起開始你的第一個鍛鍊吧!
+        div.infoimg1
+          img(:src="this.imgSrc[0]" width="620px")
+        div.infoimg2
+          img(:src="this.imgSrc[1]" width="600px")
+        h4.box-1-title2
+        div.box-2 鍛鍊沒有什麼理由，可以只是為了變成更好的自己!我們的核心理念在於提供人們一個能夠隨時開始鍛鍊的環境，不論是熱愛運動的你，還是因為疫情無法出門的你，我們都希望能藉由提供簡單的動作教學，以及可以配合鍛鍊使用的計時器，達到改善人們體態、使身心平衡與放鬆的成效，現在，還有什麼理由繼續懶下去呢?快一起開始你的第一個鍛鍊吧!
       //- 適用對象
-      b-container.content1
+      b-container.content2
         div.num2
         div.text-center.mx-auto.c1-title APPLICABLE
         b-row.c2-img.w-100.h-100.justify-content-center
           b-col(cols='3').d-flex.justify-content-center.align-items-center.flex-column
             div.img-wrap.mx-1
-              img(src='https://picsum.photos/600/500/?random=1')
+              img(:src="this.imgSrc[2]")
             h5.my-4 3C 產品使用者
           b-col(cols='12').d-md-none
 
           b-col(cols='3').d-flex.justify-content-center.align-items-center.flex-column
             div.img-wrap.mx-1
-              img(src='https://picsum.photos/600/500/?random=2')
+              img(:src="this.imgSrc[3]")
             h5.my-4 久坐族群
           b-col(cols='12').d-md-none
 
           b-col(cols='3').d-flex.justify-content-center.align-items-center.flex-column
             div.img-wrap.mx-1
-              img(src='https://picsum.photos/600/500/?random=3')
+              img(:src="this.imgSrc[4]")
             h5.my-4 有運動習慣者
           b-col(cols='12').d-md-none
 
           b-col(cols='3').d-flex.justify-content-center.align-items-center.flex-column
             div.img-wrap.mx-1
-              img(src='https://picsum.photos/600/500/?random=4')
+              img(:src="this.imgSrc[5]")
             h5.my-4 無法外出運動者
 
         //- 建議
@@ -97,6 +103,11 @@
 
 <script>
 export default {
+  data () {
+    return {
+      imgSrc: ['./img/home2.jpg', './img/info2.jpg', './img/info3.jpg', './img/info4.jpg', './img/info5.jpg', './img/info6.jpg']
+    }
+  },
   watch: {
     height () {
       const num3Bg = document.getElementsByClassName('num3')[0]

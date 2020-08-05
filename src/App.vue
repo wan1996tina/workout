@@ -209,7 +209,8 @@ export default {
       user_account: '',
       user_password: '',
       isCenter: true,
-      userSrc: './img/user.jpg'
+      userSrc: './img/user.jpg',
+      timerModel: []
     }
   },
   components: {
@@ -356,15 +357,18 @@ export default {
     }
   },
   mounted () {
-    const user = this.$store.getters.user
-    this.axios.get(process.env.VUE_APP_APIURL + '/get_timer/' + user)
-      .then(response => {
-        console.log(response.data.result[0].timerList)
-        this.$store.commit('setTimerList', response.data.result[0].timerList)
-      })
-      .catch(() => {
-        alert('發生錯誤')
-      })
+    if (this.$store.getters.user.length > 0) {
+      const user = this.$store.getters.user
+      this.axios.get(process.env.VUE_APP_APIURL + '/get_timer/' + user)
+        .then(response => {
+          console.log(response.data.result[0].timerList.map(item => item.name))
+          this.$store.commit('setTimerList', response.data.result[0].timerList)
+          this.timerModel = response.data.result[0].timerList.map(item => item.name)
+        })
+        .catch(() => {
+          alert('發生錯誤')
+        })
+    }
 
     // const width = this.$refs.menu.$refs.sideNav.clientWidth
     // this.width = width

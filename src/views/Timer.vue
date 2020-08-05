@@ -60,7 +60,7 @@
             b-row.justify-content-around
               b-button(variant="danger" @click="resetTimer") 重設計時器
               b-button(variant="success" @click='addNewTimer') 新增到清單
-              b-button(variant="warning" v-if="user.length > 0" @click="saveTimer") 儲存到常用
+              b-button(variant="warning" v-if="user.length > 0" @click="updateData") 儲存到常用
 </template>
       <!-- <div class="clock_shadow">
         <div class="shadow_in"></div>
@@ -298,12 +298,38 @@ export default {
       }
     },
     saveTimer () {
+      const times = this.selectedTimes
+      const steps = this.$store.getters.workoutStepNum
+      const timerItem = { name: this.$store.getters.newTimerName, steps: [] }
+      if (this.$store.getters.newTimerName.length === 0) {
+        alert('請輸入計時器名稱')
+      } else if (steps === null) {
+        alert('請選擇秒數')
+      } else if (times === null) {
+        alert('請選擇次數')
+      } else {
+        for (let i = 0; i < times; i++) {
+          for (let k = 0; k < steps.length; k++) {
+            timerItem.steps.push(steps[k])
+          }
+        }
+        this.$store.commit('addList', timerItem)
+        this.newTimerName = ''
+        this.$store.commit('clearSec')
+        this.selectedTimes = null
+        this.selected = null
+      }
+    },
+    updateData () {
+      this.saveTimer()
       const user = this.$store.getters.user
       const timers = this.$store.getters.timerList
+      console.log(timers)
       this.axios.patch(process.env.VUE_APP_APIURL + '/save_timer/' + user, { timerList: timers })
         .then(response => {
           // image.edit = false
           // image.title = image.model
+          alert('已更新')
         })
         .catch(() => {
           alert('發生錯誤')

@@ -40,6 +40,9 @@ export default new Vuex.Store({
     addTodo (state, data) {
       state.todos.push({ name: data.name, steps: data.steps, edit: false, model: data })
     },
+    addList (state, data) {
+      state.timerList.push({ name: data.name, steps: data.steps, edit: false, model: data })
+    },
     dragTodo (state, data) {
       state.todos = data
     },

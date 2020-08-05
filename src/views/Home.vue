@@ -12,9 +12,10 @@
       div.vh-100.home-content
         b-row.my-5.w-75.mx-auto
           b-col.banner.p-0(col sm='12' lg='6')
-            img(:src="this.imgSrc[0]" width="800px")
+            .wrap
+              img(:src="this.imgSrc[0]" width="800px")
           b-col.mx-auto(col sm='12' lg='6')
-            h1 Dare to be great.
+            h1.h-title1 Dare to be great.
 
       //- .wrap-hooper.col-7
       //-   hooper(:settings='hooperSettings')

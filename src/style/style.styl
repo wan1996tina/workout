@@ -208,20 +208,26 @@ html,body
     height 400px
     box-shadow 0px 10px 20px rgba(50,50,50,0.1)
     color #444
+    
+    // overflow hidden
+    position relative
+
+.wrap
+    width 400px
+    overflow hidden
     object-fit fill
     object-position center center
-    overflow hidden
-    position relative
 
 #home .banner::before
     content ''
     position absolute
     background rgba(127, 255, 245, 0.7)
-    z-index 999
-    width 300px
-    height 300px
+    width 500px
+    height 500px
     border-radius 20px
     transform rotate(45deg)
+    right -400px
+    top 150px
 
 .subtitle 
     font-size 22px
@@ -352,6 +358,9 @@ html,body
 
 .list-wrap::-webkit-scrollbar 
     display none
+
+.h-title1
+    font-family 'Mulish'
 
 // ************************* home ***********************
 

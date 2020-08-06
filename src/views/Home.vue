@@ -1,7 +1,7 @@
 <template lang="pug">
   #home(ref='home')
     b-container.m-0.p-0(fluid style='width:100vw; position:relative; height:100vh')
-      .bg-video
+      .bg-video.w-100
         video(src='~@/assets/video.mp4' autoplay muted loop)
       .gradient
         p.t1 healthy mind
@@ -15,7 +15,9 @@
             .wrap
               img(:src="this.imgSrc[0]" width="800px")
           b-col.mx-auto(col sm='12' lg='6')
-            h1.h-title1 Dare to be great.
+            h1.h-title1 Strength Training
+            p.h-text1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam tempore iusto, quo voluptas, beatae magni mollitia magnam impedit molestias maiores modi ipsa inventore, nemo eum dignissimos! Rem ad sequi aliquam!
+            .h-btn1 Learning →
 
       //- .wrap-hooper.col-7
       //-   hooper(:settings='hooperSettings')

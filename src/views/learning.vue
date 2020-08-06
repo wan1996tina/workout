@@ -16,32 +16,33 @@
           p.step-title 步驟
           //- .row.step-wrap.text-center.justify-content-lg-start
           //-   .col-11.step(v-for="(step,index) in this.steps") {{step}}
-          .col-10.mx-auto
-            hooper(:settings="this.hooperSettings").hooper-style
-              slide.go
-                .content slide1
-              slide.go1
-                .content slide2
-              slide.go2
-                .content slide3
-              slide.go3
-                .content slide4
-              slide.go4
-                .content slide5
-              slide.go5
-                .content slide6
+          .col-10.mx-auto.d-flex.flex-column.h-50.bg-info.align-items-center
+            .steps-item(v-for="(item, index) in this.steps") {{item}}
+            //- hooper(:settings="this.hooperSettings").hooper-style
+            //-   slide.go
+            //-     .content slide1
+            //-   slide.go1
+            //-     .content slide2
+            //-   slide.go2
+            //-     .content slide3
+            //-   slide.go3
+            //-     .content slide4
+            //-   slide.go4
+            //-     .content slide5
+            //-   slide.go5
+            //-     .content slide6
           .row
             .col.my-5
               a.btn-start.mx-auto 開始鍛鍊
             .col.my-5
-              a.btn-add.mx-auto 加入我的清單
+              a.btn-add.mx-auto(@click='addtolist') 加入我的清單
           .row
             .col.prev.text-center
               font-awesome-icon(:icon="['fas','arrow-left']")
               a 上一個
             .col.toMenu.text-center.d-flex.flex-column.justify-content-center
               font-awesome-icon(:icon="['fas','home']").d-block.mx-auto.my-2
-              a 回到目錄
+              a(@click="gotomenu") 回到目錄
             .col.prev.text-center
               a 下一個
               font-awesome-icon(:icon="['fas','arrow-right']")
@@ -60,13 +61,14 @@ export default {
   data () {
     return {
       videoSrc: this.$route.params.vSrc,
-      steps: ['向兩側平舉張開雙手', '雙腳打開與肩同寬', '確認膝蓋與腳尖同樣朝外', '雙膝彎曲成90度', '上半身向右側轉，同時看向右側'],
+      steps: ['抬頭正面朝向前方，慢慢將一邊耳朵貼向肩膀，保持正面朝前，不轉頭，並注意不要聳肩，另一邊亦重複相同動作。', '抬頭、背挺直，肩膀保持不動，慢慢將正臉轉90度朝向一邊，注意下巴不要往脖子縮，另一邊亦重複相同動作。'],
       hooperSettings: {
         vertical: true,
         itemstoshow: 3,
         centermode: true
       },
-      navItem: [{ content: '關於動作' }, { content: '準備什麼?' }, { content: '要注意喔!' }]
+      navItem: [{ content: '關於動作' }, { content: '準備什麼?' }, { content: '要注意喔!' }],
+      learningItem: []
     }
   },
   components: {
@@ -78,7 +80,16 @@ export default {
     change (content) {
       console.log(this.$refs.navContent)
       this.$refs.navContent.innerHTML = '<p>' + content + '</p>'
+    },
+    addtolist () {
+
+    },
+    gotomenu () {
+      this.$router.push({ name: 'Workout' })
     }
+  },
+  mounted () {
+    this.$store.commit('addL', this.$route.params)
   }
 }
 </script>
@@ -104,6 +115,14 @@ export default {
 
 .hooper-style
   border-radius 8px
+
+.steps-item
+  width 400px
+  height 80px
+  margin-top 20px
+  background #fff
+  text-align center
+  line-height 40px
 
 .content
   margin 10px auto

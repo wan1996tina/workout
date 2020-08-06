@@ -33,6 +33,14 @@ html,body
     box-sizing border-box
     font-family 'Microsoft JhengHei','Arial'
 
+.logo-title
+    font-family bebasneue
+    letter-spacing 2px
+    margin 0
+    line-height 40px
+    font-size 25px
+    color#fff
+
 // ---------- app.vue ----------------------------------------------------------
 #app 
     width 100%
@@ -41,7 +49,7 @@ html,body
     overflow hidden
 
 .main-content
-    width 100%
+    width 101%
     height 100%
     position fixed
     top 56px
@@ -185,7 +193,7 @@ html,body
     position absolute
     width 100%
     right 0
-    
+
 // ---------- home.vue ----------------------------------------------------------
 #home
     background #fff
@@ -204,11 +212,10 @@ html,body
     line-height 100px
 
 #home .banner
-    background #eee
+    // background #eee
     height 400px
-    box-shadow 0px 10px 20px rgba(50,50,50,0.1)
+    // box-shadow 0px 10px 20px rgba(50,50,50,0.1)
     color #444
-    
     // overflow hidden
     position relative
 
@@ -361,6 +368,45 @@ html,body
 
 .h-title1
     font-family 'Mulish'
+    font-size 70px !important
+    padding-top 150px
+
+.h-title1::before
+    content ''
+    position absolute
+    background rgb(47,85,151)
+    height 50px
+    width 15px
+    top 177px
+    left 17px
+
+.h-text1
+    padding-top 60px
+
+.h-btn1
+    width 200px
+    height 50px
+    background rgb(47,85,151)
+    border-radius 50px
+    margin-top 80px
+    color white
+    font-size 20px
+    letter-spacing 2px
+    line-height 50px
+    padding-left 40px
+    position relative
+
+.h-btn1::before
+    content ''
+    position absolute
+    background rgba(127, 255, 245, 0.7)
+    width 200px
+    height 200px
+    border-radius 8px
+    transform rotate(45deg)
+    right -350px
+    top 150px
+
 
 // ************************* home ***********************
 
@@ -773,6 +819,7 @@ html,body
     right 0%
     width 100%
     overflow scroll
+    padding-bottom 100px
 
 #workout .banner
     background #FFE1B2
@@ -908,7 +955,7 @@ html,body
     height 45%
 
 .add-item-block
-    background #ccc
+    // background #ccc
     height 50%
     display flex
     flex-direction column
@@ -942,10 +989,24 @@ html,body
 
 .new-steps::-webkit-scrollbar
     // display none
+
+.list-item-block
+    // background #ffffaa
+    height 40%
+    
+
+.t-list
+    width 90%
+    height 40px
+    line-height 40px
+    background #ffffff
+    border-radius 10px
+    margin-top 20px
+    overflow auto
 // -------- 小尺寸 -------------------------------------------------------
 
 @media(max-width:600px)
-    #nav-sm,
+    #nav-sm
     #user-option
         display block
     #menu 

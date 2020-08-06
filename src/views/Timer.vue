@@ -61,6 +61,9 @@
               b-button(variant="danger" @click="resetTimer") 重設計時器
               b-button(variant="success" @click='addNewTimer') 新增到清單
               b-button(variant="warning" v-if="user.length > 0" @click="updateData") 儲存到常用
+          .list-item-block.px-3.py-2.my-3
+            h5.my-2 Next . . .
+            b-col.t-list.mx-auto(v-for="(item) in todos") {{item.name}}
 </template>
       <!-- <div class="clock_shadow">
         <div class="shadow_in"></div>

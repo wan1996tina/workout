@@ -24,9 +24,13 @@ export default new Vuex.Store({
     workoutStep: [],
     workoutStepNum: [],
     newTimerName: '',
-    currentTimer: []
+    currentTimer: [],
+    learningItem: []
   },
   mutations: {
+    addL (state, data) {
+      state.learningItem.push(data)
+    },
     login (state, data) {
       state.user = data[0]
       state.username = data[1]

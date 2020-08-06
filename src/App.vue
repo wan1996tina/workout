@@ -28,8 +28,9 @@
     .menu-sm
       b-navbar(toggleable='lg' type='dark' variant='info' fixed="top")
         b-navbar-toggle(target='nav-collapse')
-        b-navbar-brand.text-center(href='#') Logo
-          //- img(:src='this.logoSrc' alt width='100px')
+        b-navbar-brand.text-center(href='#').d-flex
+          img(:src='this.logoSrc' style="width:40px;").ml-4.mr-3
+          p.logo-title workout
         b-collapse#nav-collapse(is-nav)
           b-navbar-nav#nav-sm.mr-auto
             b-nav-item
@@ -201,7 +202,7 @@ export default {
       currentMenu: 'push',
       isBurgerShow: true,
       width: '',
-      logoSrc: './img/logo.png',
+      logoSrc: './img/workout.png',
       name: '',
       account: '',
       password: '',
@@ -332,8 +333,8 @@ export default {
     logout () {
       this.$store.commit('logout')
     },
-    editUserList () {
-
+    editUserList (index) {
+      this.$store.commit('editTodo', index)
     }
   },
   watch: {

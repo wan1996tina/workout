@@ -20,7 +20,7 @@
             b-nav-item(href="#relax") 運動後收操
         h6.mx-auto.my-5.class-sub 運動前暖身
         b-row(id='warmUp')
-          b-col(col sm='3' v-for="(item, index) in warmUp" @click='learningPage(item)')
+          b-col(col sm='3' v-for="(item, index) in warmUp" @click='learningPage1(index)')
             div.poseCard.d-flex.justify-content-center.align-items-center.my-3.flex-column
               img(:src='item.src' width='65px').my-4
               p {{item.title}}
@@ -60,7 +60,7 @@ export default {
           subtitle: 'Neck Warm Up',
           video: 'https://www.youtube.com/embed/j1L1hoKc0XI',
           steps: ['抬頭正面朝向前方，慢慢將一邊耳朵貼向肩膀，保持正面朝前，不轉頭，並注意不要聳肩，另一邊亦重複相同動作。', '抬頭、背挺直，肩膀保持不動，慢慢將正臉轉90度朝向一邊，注意下巴不要往脖子縮，另一邊亦重複相同動作。'],
-          info: [{ 使用部位: ['提肩胛肌', '胸鎖乳突肌', '斜方肌', '中斜角肌', '前斜角肌', '後斜角肌', '頭夾肌', '頭半棘肌', '頭最長肌'] }, {}, {}],
+          info: [['提肩胛肌', '胸鎖乳突肌', '斜方肌', '中斜角肌', '前斜角肌', '後斜角肌', '頭夾肌', '頭半棘肌', '頭最長肌'], {}, {}],
           timerItem: [{ name: 'first', steps: [10, 5, 10, 5, 10, 5], edit: false, model: { name: 'first', steps: [10, 5, 10, 5, 10, 5] } }],
           index: 0
         },
@@ -100,7 +100,6 @@ export default {
         {
           id: 5,
           src: './img/r2.png',
-
           title: '膝蓋暖身',
           subtitle: 'Knees Warm Up',
           video: 'https://www.youtube.com/embed/fUgXkL61WnU',
@@ -273,9 +272,9 @@ export default {
     }
   },
   methods: {
-    learningPage (data) {
-      console.log(data.video)
-      this.$router.push({ name: 'Learning', params: { index: data.id, vSrc: data.video, title: data.title } })
+    learningPage1 (index) {
+      // console.log(data.video)
+      this.$router.push({ name: 'Learning', params: this.warmUp[index] })
     }
   }
 }

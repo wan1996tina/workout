@@ -5,11 +5,14 @@
         .col-8.text-center
           h2.my-3 {{ this.$route.params.title }}
           div.video-wrap
-            iframe(width='854' height='480' :src='videoSrc' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen)
+            iframe(width='854' height='480' :src='getdata.video' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen)
             .col-9.bg-light.mx-auto.mt-4
               b-nav
                 b-nav-item(v-for="(item, index) in this.navItem" @click="change(item.content)") {{item.content}}
               .nav-content(ref='navContent')
+                h3.py-3 使用部位
+                .d-flex.justify-content-center
+                  p(v-for="(i) in getdata.info[0]") {{i+' ,'}}
 
         //- 右半邊
         .col-4
@@ -17,7 +20,7 @@
           //- .row.step-wrap.text-center.justify-content-lg-start
           //-   .col-11.step(v-for="(step,index) in this.steps") {{step}}
           .col-10.mx-auto.d-flex.flex-column.h-50.bg-info.align-items-center
-            .steps-item(v-for="(item, index) in this.steps") {{item}}
+            .steps-item(v-for="(item, index) in getdata.steps") {{item}}
             //- hooper(:settings="this.hooperSettings").hooper-style
             //-   slide.go
             //-     .content slide1
@@ -90,6 +93,12 @@ export default {
   },
   mounted () {
     this.$store.commit('addL', this.$route.params)
+    console.log(this.$route.params)
+  },
+  computed: {
+    getdata () {
+      return this.$store.getters.getL
+    }
   }
 }
 </script>

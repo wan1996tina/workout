@@ -29,7 +29,7 @@ export default new Vuex.Store({
   },
   mutations: {
     addL (state, data) {
-      state.learningItem.push(data)
+      state.learningItem = data
     },
     login (state, data) {
       state.user = data[0]
@@ -134,6 +134,9 @@ export default new Vuex.Store({
   modules: {
   },
   getters: {
+    getL (state) {
+      return state.learningItem
+    },
     timerList (state) {
       return state.timerList
     },
